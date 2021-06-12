@@ -1,0 +1,116 @@
+	public FrameGuide() {
+		// TODO Auto-generated constructor stub
+		
+		int b = 55666;
+		String s = new String();
+		String kDireita = new String();
+		String kEsquerda = new String();
+		
+		JFrame frame = new JFrame();
+		
+		Kombi kombinha = new Kombi();
+		
+		kombinha.lerGasolinaNoTanque();
+		kombinha.lerKilometragem();
+		
+		frame.setTitle("KOMBOSA!!!");
+		
+		
+		//about size, color and visibility of window
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
+		frame.setLayout(null);
+		frame.setSize(720,1080);
+		
+		frame.getContentPane().setBackground(Color.decode("#1f4921"));
+		frame.setLocationRelativeTo(null);
+		
+		
+		//KILOMETRAGEM BUTTON
+		   
+	    //formatar o valor de kilometragem
+	    
+	    s = String.valueOf(b);
+	    
+	    System.out.println("tamanho de s = " + s.length());
+	    
+	    for(int i = s.length(); i > 2; i--) {
+	    	System.out.println("valor de s len = " + s.length() + " [" + i +"]");
+	    	kDireita = kDireita + s.charAt(i-1);
+	    	System.out.println("valor kdireita = " + kDireita);
+	    }
+	    
+	    System.out.println();
+	    
+	    for(int i = s.length() - 3; i >0; i--) {
+	    	System.out.println("valor de s len = " + s.length() + " [" + i +"]");
+	    	kEsquerda = kEsquerda + s.charAt(i-1);
+	    	System.out.println("valor kesquerda = " + kEsquerda);
+	    	
+	    } 
+	    
+	    
+	    JButton kilometragemButton = new JButton(kEsquerda + " " + kDireita);
+	    kilometragemButton.setBounds(10, 0, 700, 100);
+	    
+	    kilometragemButton.setSize(700,100);
+	    
+	    kilometragemButton.setFont(new Font("Monospace",Font.PLAIN,90));
+	    kilometragemButton.setForeground(Color.decode("#45ffff"));
+	    kilometragemButton.setBackground(Color.decode("#003500"));
+	  
+	    kilometragemButton.setVisible(true);
+	    
+	    //KILOMETRAGEM BUTTON
+		
+	    /*TANQUE PANEL*/
+	    
+	  		JPanel tanquePanel = new JPanel();
+	  		
+	  	    //tanquePanel.setBackground(Color.decode("#45a2ff"));
+	  		System.out.println("kilo em Frame" + kilometragem[n] + " [" +n + "]");
+	  		
+	    	
+	  		
+	  	    tanquePanel.setBounds(10, 110, 700, 100);
+	  	    
+	  	    JLabel hpTanqueLabel = new JLabel();
+	  	    /*
+	  	  if(kilometragem[n] > 0 && kilometragem[n] <= 10) {
+				hpTanqueLabel.setBackground(Color.red);			
+			}else if(kilometragem[n] > 10 && kilometragem[n] <= 20){
+				hpTanqueLabel.setBackground(Color.orange);	
+			}else if(kilometragem[n] > 20 && kilometragem[n] <= 30){
+				hpTanqueLabel.setBackground(Color.green);	
+			}else if(kilometragem[n] > 30 && kilometragem[n] <= 40){
+				hpTanqueLabel.setBackground(Color.blue);
+			}
+			*/	
+	  	    
+	  	    
+	  	    //hpTanqueLabel.setText("055 123");
+	  	    
+	  	    ImageIcon barrinha = new ImageIcon("b.png");
+	  	    hpTanqueLabel.setIcon(barrinha);
+	  	    
+	  	    hpTanqueLabel.setHorizontalAlignment(JLabel.CENTER);
+	  	    hpTanqueLabel.setVerticalAlignment(JLabel.CENTER);
+	  	    
+	  	    /*TANQUE PANEL*/
+	    
+	    
+	    /* INSERT LABELS*/  
+	    
+	    frame.add(kilometragemButton);
+	    
+	    tanquePanel.add(hpTanqueLabel);
+	    //frame.add(hpTanqueLabel);
+	    frame.add(tanquePanel);
+	    tanquePanel.setVisible(true);
+	    
+	    
+	    frame.setVisible(true);
+		
+		
+	}
+
