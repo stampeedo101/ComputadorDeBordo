@@ -1,15 +1,12 @@
 package kombozice;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
 import java.util.Hashtable;
-
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,13 +14,18 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
-import javax.swing.SwingConstants;
 
 public class FrameGuide extends Kombi {
+	
+	DecimalFormat dc2 = new DecimalFormat("0.00");
+	DecimalFormat dc3 = new DecimalFormat("0.000");
 	
 	public void executarAcaoInsert(MouseEvent ae) {
 		
 	}
+	
+	
+	
 	
 	protected void criarCompFramePrincipal(int kilometragem, double gas, double valorGasolina, int diaAbastecimento, int mesAbastecimento, int valorAbastecimetnto, double consumo) {
 		
@@ -49,7 +51,8 @@ public class FrameGuide extends Kombi {
 		kilometragemPanel.setBackground(Color.decode("#442f1f"));
 		kilometragemPanel.setBounds(10, 0, widthPanel, heightPanel); 
 
-		ImageIcon woodTable = new ImageIcon("wood_700X100.png");
+		// ImageIcon woodTable = new ImageIcon("wood_700X100.png"); inserir com icone dá alguns erros
+		
 		JLabel kilometragemLabel = new JLabel();
 		
 		String s = String.valueOf(kilometragem);
@@ -133,7 +136,8 @@ public class FrameGuide extends Kombi {
          
         // Set the labels to be painted on the tanqueSlider
         tanqueSlider.setPaintLabels(true);
-         
+        
+        
         // Add positions label in the slider
         Hashtable position = new Hashtable();
         
@@ -143,6 +147,15 @@ public class FrameGuide extends Kombi {
         position.put(30, new JLabel("30"));
         position.put(40, new JLabel("40"));
         
+        /* 
+        Map<Integer, String> map = new HashMap<>();
+        
+        map.put(0,"0");
+        map.put(10,"10");
+        map.put(20,"20");
+        map.put(30,"30");
+        map.put(40,"40");
+        */
          
         // Set the label to be drawn
         tanqueSlider.setLabelTable(position);
@@ -210,30 +223,7 @@ public class FrameGuide extends Kombi {
 		
 		
 		
-		/* BOTÃO REFRESH */	
-		
-		Icon refreshIcon = new ImageIcon("refreshButton3.png");
-		
-		JButton refreshButton = new JButton(refreshIcon);
-		
-		refreshButton.setBackground(Color.decode("#367f39"));
-		refreshButton.setForeground(Color.decode("#002232"));
-		refreshButton.setBounds(630, 220, 50, 50);
-		
-		refreshButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				System.out.println("refresh foi clicado.");
-				
-				//insertKilometragemNova();
-				
-				kilometragemLabel.setText("0" + kilometragemNova);
-			}
-		});
-		
-		/* BOTÃO REFRESH */
+
 
 
 
@@ -347,6 +337,42 @@ public class FrameGuide extends Kombi {
 		
 		//DESENHO
 
+		
+		/* BOTÃO REFRESH */	
+		
+		Icon refreshIcon = new ImageIcon("refreshButton3.png");
+		
+		JButton refreshButton = new JButton(refreshIcon);
+		
+		refreshButton.setBackground(Color.decode("#367f39"));
+		refreshButton.setForeground(Color.decode("#002232"));
+		refreshButton.setBounds(630, 220, 50, 50);
+		
+		refreshButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				System.out.println("\nrefresh foi clicado.");
+				
+				//insertKilometragemNova();
+				if(kilometragemNova != 0) {
+					kilometragemLabel.setText("0" + kilometragemNova);
+					nomePostoValorGasolinaLabel.setText(siglaPostoNovo + " R$ " + dc3.format(precoGasolinaNovo));
+					abastecimentoDateLabel.setText(diaAbastecimentoNovo + "/" + mesAbastecimentoNovo + "/" + "20" + anoAbastecimentoNovo );
+					abastecimentoMoneyLabel.setText("R$ " + valorAbastecimentoNovo);
+					kmLitroLabel.setText(dc2.format(km_litro) + " km/l");
+
+					
+				}
+				
+				inserirNovosDadosTxT();
+				tanqueSlider.setValue((int) Math.round(GasolinaNoTanque[n])); //inserir valor slider
+				
+			}
+		});
+		
+		/* BOTÃO REFRESH */
 
 
 		/* INSERT LABELS*/

@@ -10,17 +10,17 @@ public class Posto extends AbastecimentoSpinner{
 
 	String[] siglasPosto = new String[]{"brC","brM","Outro"};
 
-	byte tamanhoDosVetoresPosto = 50;
+	byte tamanhoDosVetoresPosto = 50, nPosto=0;
 
 	String[] siglaDoPosto = new String[tamanhoDosVetoresPosto];
 
 	double[] precoGasolina = new double[tamanhoDosVetoresPosto];
 	
 	
-	byte[] valorAbastecimento = new byte[tamanhoDosVetoresPosto];
-	byte[] diaAbastecimento = new byte[tamanhoDosVetoresPosto];
-	byte[] mesAbastecimento = new byte[tamanhoDosVetoresPosto];
-	byte[] anoAbastecimento = new byte[tamanhoDosVetoresPosto];
+	int[] valorAbastecimento = new int[tamanhoDosVetoresPosto];
+	int[] diaAbastecimento = new int[tamanhoDosVetoresPosto];
+	int[] mesAbastecimento = new int[tamanhoDosVetoresPosto];
+	int[] anoAbastecimento = new int[tamanhoDosVetoresPosto];
 
 	//initialize vectors
 
@@ -35,18 +35,19 @@ public class Posto extends AbastecimentoSpinner{
 		}
 	}
 
-	protected void lerDoubleInserirArquivoTxt(byte contador, double[] doubleValues, String arquivo){
+	protected void lerDoubleInserirArquivoTxt(int contador, double[] doubleValues, String arquivo){
 		System.out.println();
 
 		try{
 
 			Scanner  x = new Scanner(new File(arquivo));
 
-			for(int i = 0; i < contador -1; i++) {				
+			for(byte i = 0; i < contador -1; i++) {				
 
 				if(x.hasNextDouble()) {
 					doubleValues[i] = x.nextDouble()/1000;
-					System.out.println("valores de double" + arquivo + " " + doubleValues[i] + " i "+ i);
+					nPosto = i;
+					System.out.println("valores de double" + arquivo + " " + doubleValues[i] + " i "+ i + " O nPosto é " + nPosto);
 				}				
 
 			}
@@ -59,7 +60,7 @@ public class Posto extends AbastecimentoSpinner{
 
 	}
 	
-	protected void lerByteInserirArquivoTxt(byte contador, byte[] doubleValues, String arquivo){
+	protected void lerByteInserirArquivoTxt(int contador, int[] doubleValues, String arquivo){
 		
 		System.out.println();
 
@@ -69,8 +70,8 @@ public class Posto extends AbastecimentoSpinner{
 
 			for(int i = 0; i < contador -1; i++) {				
 
-				if(x.hasNextByte()) {
-					doubleValues[i] = x.nextByte();
+				if(x.hasNextInt()) {
+					doubleValues[i] = x.nextInt();
 					System.out.println("valores no arquivo " + arquivo + " " + doubleValues[i] + " i "+ i);
 				}				
 
@@ -108,7 +109,7 @@ public class Posto extends AbastecimentoSpinner{
 
 	}
 	
-	protected void inserirByteArquivoTxt(String fileName, byte[] numeros, byte tamanhoVetor){		
+	protected void inserirByteArquivoTxt(String fileName, int[] numeros, int tamanhoVetor){		
 		
 		{
 			try
@@ -131,8 +132,66 @@ public class Posto extends AbastecimentoSpinner{
 			}
 		}
 		
+		
 	}
 	
+	protected void inserirDoubleArquivoTxt(String fileName, double[] numeros, int tamanhoVetor){		
+		
+		{
+			try
+			{
+				PrintWriter pr = new PrintWriter(fileName);    
+
+				for (int i=0; i < tamanhoVetor; i++){
+					if(numeros[i] != 0) {
+						pr.println(numeros[i]);
+					}
+					
+				}
+				
+				pr.close();
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+				System.out.println("No such file exists.");
+			}
+		}
+		
+		
+	}
+	
+	protected void lerDadoPosto() {
+		
+		lerDoubleInserirArquivoTxt(tamanhoDosVetoresPosto, precoGasolina, "precoGasolina.txt");
+
+		lerByteInserirArquivoTxt(tamanhoDosVetoresPosto, valorAbastecimento, "valorAbastecimento.txt");
+
+		lerByteInserirArquivoTxt(tamanhoDosVetoresPosto, diaAbastecimento, "diaAbastecimento.txt");
+
+		lerByteInserirArquivoTxt(tamanhoDosVetoresPosto, mesAbastecimento, "mesAbastecimento.txt");
+
+		lerByteInserirArquivoTxt(tamanhoDosVetoresPosto,anoAbastecimento, "anoAbastecimento.txt");
+		
+		lerSiglaDoPosto();
+	}
+	
+	protected void inserirNovosDadosTxT() {
+		if(valorAbastecimentoNovo != 0) {
+			precoGasolina[nPosto + 1] = precoGasolinaNovo;
+			valorAbastecimento[nPosto + 1] = valorAbastecimentoNovo;
+			diaAbastecimento[nPosto + 1] = diaAbastecimentoNovo;
+			mesAbastecimento[nPosto + 1] = mesAbastecimentoNovo;
+			anoAbastecimento[nPosto + 1] = anoAbastecimentoNovo;
+			
+			inserirDoubleArquivoTxt("precoGasolinaNovo.txt", precoGasolina,tamanhoDosVetoresPosto);
+			inserirByteArquivoTxt("vAbastNovo.txt", valorAbastecimento,tamanhoDosVetoresPosto);
+			inserirByteArquivoTxt("diaAbastNovo.txt", diaAbastecimento, tamanhoDosVetoresPosto);
+			inserirByteArquivoTxt("mesAbastNovo.txt", mesAbastecimento, tamanhoDosVetoresPosto);
+			inserirByteArquivoTxt("anoAbastNovo.txt", anoAbastecimento, tamanhoDosVetoresPosto);
+		}
+		
+	}
 	
 
 }

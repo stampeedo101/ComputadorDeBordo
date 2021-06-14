@@ -353,19 +353,13 @@ public class Kombi extends Posto {
 			
 		}
 
-		protected void inserirViaInterface() {
-			
-		}
+
 		
 		protected void variarKilometragem() {
-			inserirViaInterface();
 			calcularVariacaoTanque();
 			inserirValorKilometragem();
 			
 		}
 
-		void desenharDiagramaTanque(){
-			System.out.println();
-		}
 
 }

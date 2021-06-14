@@ -31,7 +31,7 @@ public class ComputadorDeBordo extends FrameGuide {
 
 
 		if(comp00zero.kilometragemNovaEntrou) {
-			System.out.println("\no valor safado de kilometragem nova é " + comp00zero.kilometragemNova);
+			System.out.println("\no valor de kilometragem nova é " + comp00zero.kilometragemNova);
 		}
 
 
@@ -47,20 +47,8 @@ public class ComputadorDeBordo extends FrameGuide {
 						);
 		 */
 
-
-
-		comp00zero.lerDoubleInserirArquivoTxt(comp00zero.tamanhoDosVetoresPosto, comp00zero.precoGasolina, "precoGasolina.txt");
-
-		comp00zero.lerByteInserirArquivoTxt(comp00zero.tamanhoDosVetoresPosto, comp00zero.valorAbastecimento, "valorAbastecimento.txt");
-
-		comp00zero.lerByteInserirArquivoTxt(comp00zero.tamanhoDosVetoresPosto, comp00zero.diaAbastecimento, "diaAbastecimento.txt");
-
-		comp00zero.lerByteInserirArquivoTxt(comp00zero.tamanhoDosVetoresPosto, comp00zero.mesAbastecimento, "mesAbastecimento.txt");
-
-		comp00zero.lerByteInserirArquivoTxt(comp00zero.tamanhoDosVetoresPosto,comp00zero.anoAbastecimento, "anoAbastecimento.txt");
-		
-		comp00zero.lerSiglaDoPosto();
-	
+		//ler datas,precos ..., referentes ao posto
+		comp00zero.lerDadoPosto();
 
 		System.out.println("\n\n\nO valor de precoGasolina é " + comp00zero.precoGasolina[0] +
 				" E o valor do abastecimento é " + comp00zero.valorAbastecimento[0] +

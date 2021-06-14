@@ -14,19 +14,32 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerListModel;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingConstants;
 
 
-public class AbastecimentoSpinner extends KilometragemSpinner {
+public class AbastecimentoSpinner {
+
+
+
+	String siglaPostoNovo = " "; 
+
+	double precoGasolinaNovo = 0;
+
+	int kilometragemNova = 0;
 	
-	int espacoVertical = 10,tamanhoPanel = 40,tamanhoSpinner = 60;
+	byte espacoVertical = 10,tamanhoPanel = 40,tamanhoSpinner = 60;
+
+	int valorAbastecimentoNovo = 0, diaAbastecimentoNovo=1, mesAbastecimentoNovo=1, anoAbastecimentoNovo=20;
+	
+	boolean kilometragemNovaEntrou = false;
 
 	protected void criarSpinnerAbastecimento() {
 
 		JFrame f = new JFrame("Abastecimento de Combustível");
-		
+
 		f.setSize(720,4*tamanhoSpinner+4*tamanhoPanel+8*espacoVertical); 
 		//3*tamanhoSpinner+3*tamanhoPanel+7*espacoVertical
-		
+
 		//INSERIR KILOMETRAGEM
 
 		JPanel firstPanel = new JPanel();
@@ -105,16 +118,16 @@ public class AbastecimentoSpinner extends KilometragemSpinner {
 		f.add(spinner4);
 
 		// (720-280)/2 = 360-190=170
-		
+
 		JButton insertKilometragemButton = new JButton();
-		
+
 		insertKilometragemButton.setText("INSERIR");
 		insertKilometragemButton.setBackground(Color.decode("#367f39"));
 		insertKilometragemButton.setForeground(Color.decode("#002232"));
 		insertKilometragemButton.setFont(new Font("Monospace",Font.PLAIN,20));
 		insertKilometragemButton.setBounds((720-280)/2 + 5*tamanhoSpinner + 5*espacoVertical,2*espacoVertical+tamanhoPanel, 120, tamanhoSpinner);
 		f.add(insertKilometragemButton);
-		
+
 		insertKilometragemButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -146,132 +159,181 @@ public class AbastecimentoSpinner extends KilometragemSpinner {
 				f.setState(Frame.ICONIFIED);
 			}
 		});
-		
+
 		//INSERIR KILOMETRAGEM
-		
-		
-		
+
+
+
 		//INSERIR POSTO
-		
+
 		JPanel postoPanel = new JPanel();
 
 		postoPanel.setBackground(Color.decode("#003500"));
 		postoPanel.setBounds(espacoVertical, tamanhoSpinner+tamanhoPanel+3*espacoVertical, 700, tamanhoPanel);
 
 		JLabel postoLabel = new JLabel();
-		
+
 		postoLabel.setBackground(Color.decode("#004a93"));
 		postoLabel.setText("Sigla do posto:                       Valor da Gasolina:");
 		postoLabel.setForeground(Color.decode("#45ffff"));
 		postoLabel.setFont(new Font("Monospace",Font.PLAIN,tamanhoPanel/2));
 		postoLabel.setVerticalAlignment(JLabel.CENTER);
 		postoLabel.setHorizontalAlignment(JLabel.CENTER);
-		
-		 SpinnerListModel listaSiglasPosto = new SpinnerListModel(new String[] { "BrC","BrM", "outro" });
-		 
-		 JSpinner SiglasPosto = new JSpinner(listaSiglasPosto);
 
-		 SiglasPosto.setBounds(espacoVertical, tamanhoSpinner+2*tamanhoPanel+4*espacoVertical,2*tamanhoSpinner,tamanhoSpinner);
+		SpinnerListModel listaSiglasPosto = new SpinnerListModel(new String[] { "BrC","BrM", "outro" });
 
-		 SiglasPosto.setFont(new Font("Monospace",Font.PLAIN,tamanhoSpinner/2));
-		
-		 f.add(SiglasPosto);
+		JSpinner SiglasPosto = new JSpinner(listaSiglasPosto);
+
+		SiglasPosto.setBounds(espacoVertical, tamanhoSpinner+2*tamanhoPanel+4*espacoVertical,2*tamanhoSpinner,tamanhoSpinner);
+
+		SiglasPosto.setFont(new Font("Monospace",Font.PLAIN,tamanhoSpinner/2));
+
+		f.add(SiglasPosto);
 		//INSERIR POSTO
-		
-		
-		
-		 //INSERIR VALO GASOLINA
-
-		 SpinnerModel gValue0 =  
-				 new SpinnerNumberModel(0, //initial value  
-						 0, //minimum value  
-						 9, //maximum value  
-						 1); //step
-
-		 JSpinner gasolina0 = new JSpinner(gValue0);
-
-		 gasolina0.setBounds(6*tamanhoSpinner,tamanhoSpinner+2*tamanhoPanel+4*espacoVertical,tamanhoSpinner,tamanhoSpinner);
-
-		 gasolina0.setFont(new Font("Monospace",Font.PLAIN,50));
-		 f.add(gasolina0);
-
-		 SpinnerModel gValue1 =  
-				 new SpinnerNumberModel(1, //initial value  
-						 0, //minimum value  
-						 9, //maximum value  
-						 1); //step
-
-		 JSpinner gasolina1 = new JSpinner(gValue1);
-
-		 gasolina1.setBounds(6*tamanhoSpinner+tamanhoSpinner+espacoVertical,tamanhoSpinner+2*tamanhoPanel+4*espacoVertical,tamanhoSpinner,tamanhoSpinner);
-
-		 gasolina1.setFont(new Font("Monospace",Font.PLAIN,50));
-		 f.add(gasolina1);
-
-		 SpinnerModel gValue2 =  
-				 new SpinnerNumberModel(2, //initial value  
-						 0, //minimum value  
-						 9, //maximum value  
-						 1); //step
-
-		 JSpinner gasolina2 = new JSpinner(gValue2);
-
-		 gasolina2.setBounds(6*tamanhoSpinner+2*tamanhoSpinner+2*espacoVertical,tamanhoSpinner+2*tamanhoPanel+4*espacoVertical,tamanhoSpinner,tamanhoSpinner);
-
-		 gasolina2.setFont(new Font("Monospace",Font.PLAIN,50));
-		 f.add(gasolina2);
-		 
-		 SpinnerModel gValue3 =  
-				 new SpinnerNumberModel(3, //initial value  
-						 0, //minimum value  
-						 9, //maximum value  
-						 1); //step
-
-		 JSpinner gasolina3 = new JSpinner(gValue3);
-
-		 gasolina3.setBounds(6*tamanhoSpinner+3*tamanhoSpinner+3*espacoVertical,tamanhoSpinner+2*tamanhoPanel+4*espacoVertical,tamanhoSpinner,tamanhoSpinner);
-
-		 gasolina3.setFont(new Font("Monospace",Font.PLAIN,50));
-		 f.add(gasolina3);
-
-		 //INSERIR VALO GASOLINA
-		 
-		
-		 //INSERIR DATA ABASTECIMENTO
-
-		 JPanel valorAbastecimentoPanel = new JPanel();
-
-		 valorAbastecimentoPanel.setBackground(Color.decode("#003500"));
-		 valorAbastecimentoPanel.setBounds(espacoVertical,2*tamanhoSpinner+2*tamanhoPanel+5*espacoVertical, 700, tamanhoPanel);
-
-		 JLabel valorAbastecimentoLabel = new JLabel();
-
-		 valorAbastecimentoLabel.setBackground(Color.decode("#004a93"));
-		 valorAbastecimentoLabel.setText("Valor do abastecimento (em dezenas de reais): ");
-		 valorAbastecimentoLabel.setForeground(Color.decode("#45ffff"));
-		 valorAbastecimentoLabel.setFont(new Font("Monospace",Font.PLAIN,tamanhoPanel/2));
-		 valorAbastecimentoLabel.setVerticalAlignment(JLabel.CENTER);
-		 valorAbastecimentoLabel.setHorizontalAlignment(JLabel.CENTER);
-
-		 SpinnerModel abastecimentoValue =  
-				 new SpinnerNumberModel(50, //initial value  
-						 0, //minimum value  
-						 100, //maximum value  
-						 10); //step
-
-		 JSpinner valorAbastecimentoSpinner = new JSpinner(abastecimentoValue);
-
-		 valorAbastecimentoSpinner.setBounds(6*tamanhoSpinner,2*tamanhoSpinner+3*tamanhoPanel+6*espacoVertical,2*tamanhoSpinner,tamanhoSpinner);
-
-		 valorAbastecimentoSpinner.setFont(new Font("Monospace",Font.PLAIN,tamanhoSpinner-10));
-		 f.add(valorAbastecimentoSpinner);
-
-		 //INSERIR VALOR ABASTECIMENTO
 
 
-		 
-		 //BOTÃO INSERIR ABASTECIMENTO
-		 
+
+		//INSERIR VALO GASOLINA
+
+		SpinnerModel gValue0 =  
+				new SpinnerNumberModel(5, //initial value  
+						0, //minimum value  
+						9, //maximum value  
+						1); //step
+
+		JSpinner gasolina0 = new JSpinner(gValue0);
+
+		gasolina0.setBounds(6*tamanhoSpinner,tamanhoSpinner+2*tamanhoPanel+4*espacoVertical,tamanhoSpinner,tamanhoSpinner);
+
+		gasolina0.setFont(new Font("Monospace",Font.PLAIN,50));
+		f.add(gasolina0);
+
+		SpinnerModel gValue1 =  
+				new SpinnerNumberModel(1, //initial value  
+						0, //minimum value  
+						9, //maximum value  
+						1); //step
+
+		JSpinner gasolina1 = new JSpinner(gValue1);
+
+		gasolina1.setBounds(6*tamanhoSpinner+tamanhoSpinner+espacoVertical,tamanhoSpinner+2*tamanhoPanel+4*espacoVertical,tamanhoSpinner,tamanhoSpinner);
+
+		gasolina1.setFont(new Font("Monospace",Font.PLAIN,50));
+		f.add(gasolina1);
+
+		SpinnerModel gValue2 =  
+				new SpinnerNumberModel(2, //initial value  
+						0, //minimum value  
+						9, //maximum value  
+						1); //step
+
+		JSpinner gasolina2 = new JSpinner(gValue2);
+
+		gasolina2.setBounds(6*tamanhoSpinner+2*tamanhoSpinner+2*espacoVertical,tamanhoSpinner+2*tamanhoPanel+4*espacoVertical,tamanhoSpinner,tamanhoSpinner);
+
+		gasolina2.setFont(new Font("Monospace",Font.PLAIN,50));
+		f.add(gasolina2);
+
+		SpinnerModel gValue3 =  
+				new SpinnerNumberModel(3, //initial value  
+						0, //minimum value  
+						9, //maximum value  
+						1); //step
+
+		JSpinner gasolina3 = new JSpinner(gValue3);
+
+		gasolina3.setBounds(6*tamanhoSpinner+3*tamanhoSpinner+3*espacoVertical,tamanhoSpinner+2*tamanhoPanel+4*espacoVertical,tamanhoSpinner,tamanhoSpinner);
+
+		gasolina3.setFont(new Font("Monospace",Font.PLAIN,50));
+		f.add(gasolina3);
+
+		//INSERIR VALO GASOLINA
+
+
+		//INSERIR DATA ABASTECIMENTO
+
+		JPanel valorAbastecimentoPanel = new JPanel();
+
+		valorAbastecimentoPanel.setBackground(Color.decode("#003500"));
+		valorAbastecimentoPanel.setBounds(espacoVertical,2*tamanhoSpinner+2*tamanhoPanel+5*espacoVertical, 700, tamanhoPanel);
+
+
+		JLabel valorAbastecimentoLabel = new JLabel();
+
+		valorAbastecimentoLabel.setBackground(Color.decode("#004a93"));
+		valorAbastecimentoLabel.setText("Abastecimento (R$):                                     data:            ");
+		valorAbastecimentoLabel.setForeground(Color.decode("#45ffff"));
+		valorAbastecimentoLabel.setFont(new Font("Monospace",Font.PLAIN,tamanhoPanel/2));
+		valorAbastecimentoLabel.setHorizontalTextPosition(SwingConstants.LEFT);
+		valorAbastecimentoLabel.setVerticalAlignment(JLabel.CENTER);
+		valorAbastecimentoLabel.setHorizontalAlignment(10);
+
+		SpinnerModel abastecimentoValue =  
+				new SpinnerNumberModel(50, //initial value  
+						1, //minimum value  
+						300, //maximum value  
+						10); //step
+
+		JSpinner valorAbastecimentoSpinner = new JSpinner(abastecimentoValue);
+
+		valorAbastecimentoSpinner.setBounds(espacoVertical,2*tamanhoSpinner+3*tamanhoPanel+6*espacoVertical,2*tamanhoSpinner,tamanhoSpinner);
+
+		valorAbastecimentoSpinner.setFont(new Font("Monospace",Font.PLAIN,tamanhoSpinner-10));
+		f.add(valorAbastecimentoSpinner);
+
+		//INSERIR VALOR ABASTECIMENTO
+
+		//DATA SPINNER
+
+		SpinnerModel diaDataValue =  
+				new SpinnerNumberModel(15, //initial value  
+						1, //minimum value  
+						30, //maximum value  
+						1); //step
+
+		JSpinner diaDataSpinner = new JSpinner(diaDataValue);
+
+		diaDataSpinner.setBounds(7*tamanhoSpinner,2*tamanhoSpinner+3*tamanhoPanel+6*espacoVertical,3*espacoVertical+tamanhoSpinner,tamanhoSpinner);
+
+		diaDataSpinner.setFont(new Font("Monospace",Font.PLAIN,tamanhoSpinner-10));
+		f.add(diaDataSpinner);
+
+
+
+		SpinnerModel mesDataValue =  
+				new SpinnerNumberModel(6, //initial value  
+						1, //minimum value  
+						12, //maximum value  
+						1); //step
+
+		JSpinner mesDataSpinner = new JSpinner(mesDataValue);
+
+		mesDataSpinner.setBounds(8*tamanhoSpinner+4*espacoVertical,2*tamanhoSpinner+3*tamanhoPanel+6*espacoVertical,3*espacoVertical+tamanhoSpinner,tamanhoSpinner);
+
+		mesDataSpinner.setFont(new Font("Monospace",Font.PLAIN,tamanhoSpinner-10));
+		f.add(mesDataSpinner);
+
+
+
+		SpinnerModel anoDataValue =  
+				new SpinnerNumberModel(21, //initial value  
+						21, //minimum value  
+						99, //maximum value  
+						1); //step
+
+		JSpinner anoDataSpinner = new JSpinner(anoDataValue);
+
+		anoDataSpinner.setBounds(9*tamanhoSpinner+8*espacoVertical,2*tamanhoSpinner+3*tamanhoPanel+6*espacoVertical,3*espacoVertical+tamanhoSpinner,tamanhoSpinner);
+
+		anoDataSpinner.setFont(new Font("Monospace",Font.PLAIN,tamanhoSpinner-10));
+		f.add(anoDataSpinner);
+
+		//DATA SPINNER
+
+
+
+		//BOTÃO INSERIR ABASTECIMENTO
+
 		JButton insertButton = new JButton();
 
 		insertButton.setText("INSERIR NOVO ABASTECIMENTO");
@@ -299,38 +361,55 @@ public class AbastecimentoSpinner extends KilometragemSpinner {
 						((Integer)spinner3.getValue())*10 +
 						((Integer)spinner4.getValue()) 
 						;
-				/*
-				System.out.println("Value : " + 
-						spinner0.getValue() + 
-						spinner1.getValue() +
-						spinner2.getValue() +
-						spinner3.getValue() + 
-						spinner4.getValue() 
-				);  
-				 */
-				System.out.println("\nNovo Abastecimento realizado");
+
+
+				siglaPostoNovo = (String) SiglasPosto.getValue();
+
+				precoGasolinaNovo = ((Integer)gValue0.getValue()) +
+						((double)((Integer)gValue1.getValue()))/10 +
+						((double)((Integer)gValue2.getValue()))/100 +
+						((double)((Integer)gValue3.getValue()))/1000
+						;
+
+				valorAbastecimentoNovo = (Integer)valorAbastecimentoSpinner.getValue();
+
+				diaAbastecimentoNovo = (Integer)diaDataSpinner.getValue();
+
+				mesAbastecimentoNovo = (Integer)mesDataSpinner.getValue();
+
+				anoAbastecimentoNovo = (Integer)anoDataSpinner.getValue();
+
+
+				System.out.println("\nNovo Abastecimento realizado com a sigla do posto " +
+									siglaPostoNovo + " preço da Gasolina " +
+									precoGasolinaNovo + " valor do Abastecimento " +
+									valorAbastecimentoNovo + " e data " +
+									diaAbastecimentoNovo + "/" +
+									mesAbastecimentoNovo + "/20" +
+									anoAbastecimentoNovo + "." 
+				);
 
 				f.setState(Frame.ICONIFIED);
 			}
 		});
-		
+
 		//BOTÃO INSERIR ABASTECIMENTO
-		 
-		
+
+
 
 		firstPanel.add(firstLabel);
 		f.add(firstPanel);
 
 		postoPanel.add(postoLabel);
 		f.add(postoPanel);
-		
+
 		valorAbastecimentoPanel.add(valorAbastecimentoLabel);
 		f.add(valorAbastecimentoPanel);
 
 
 		f.add(insertButton);
 
-		   
+
 		f.setLayout(null);    
 		f.setVisible(true);  
 
