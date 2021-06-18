@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 
-public class FrameGuide extends Kombi {
+public class FrameGuide extends AbastecimentoSpinner {
 	
 	DecimalFormat dc2 = new DecimalFormat("0.00");
 	DecimalFormat dc3 = new DecimalFormat("0.000");
@@ -199,7 +199,7 @@ public class FrameGuide extends Kombi {
 		JButton insertButton = new JButton();
 		
 		insertButton.setText("Insert");
-		insertButton.setBackground(Color.decode("#1f3444"));
+		insertButton.setBackground(Color.decode("#3E67E8"));
 		insertButton.setForeground(Color.decode("#ffffff"));
 		insertButton.setFont(new Font("Monospace",Font.PLAIN,50));
 		insertButton.setBounds(110, 220, 500, 60);
@@ -355,18 +355,22 @@ public class FrameGuide extends Kombi {
 				// TODO Auto-generated method stub
 				System.out.println("\nrefresh foi clicado.");
 				
-				//insertKilometragemNova();
-				if(kilometragemNova != 0) {
+				//Display KilometragemNova();
+				if(kilometragemNova != 0 ) {
+					kilometragemLabel.setText("0" + kilometragemNova);
+					//inserirValorKilometragem();
+					//FrameGuide.this.kilometragem[n] = kilometragemNova;
+				}
+				
+				//Display Abastecimento novo
+				if(kilometragemNova != 0 && valorAbastecimentoNovo !=0) {
 					kilometragemLabel.setText("0" + kilometragemNova);
 					nomePostoValorGasolinaLabel.setText(siglaPostoNovo + " R$ " + dc3.format(precoGasolinaNovo));
 					abastecimentoDateLabel.setText(diaAbastecimentoNovo + "/" + mesAbastecimentoNovo + "/" + "20" + anoAbastecimentoNovo );
 					abastecimentoMoneyLabel.setText("R$ " + valorAbastecimentoNovo);
-					kmLitroLabel.setText(dc2.format(km_litro) + " km/l");
-
-					
+					kmLitroLabel.setText(dc2.format(km_litro) + " km/l");					
 				}
 				
-				inserirNovosDadosTxT();
 				tanqueSlider.setValue((int) Math.round(GasolinaNoTanque[n])); //inserir valor slider
 				
 			}

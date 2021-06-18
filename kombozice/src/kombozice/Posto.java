@@ -5,8 +5,11 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-public class Posto extends AbastecimentoSpinner{
+public class Posto{
 	//kilometragem	Status tanque	Novo abastecimento mudar kilometragem e status tanque
+	
+	int valorAbastecimentoNovo=0, diaAbastecimentoNovo=1, mesAbastecimentoNovo=1, anoAbastecimentoNovo=21;
+	double precoGasolinaNovo=0;
 
 	String[] siglasPosto = new String[]{"brC","brM","Outro"};
 
@@ -177,7 +180,9 @@ public class Posto extends AbastecimentoSpinner{
 	}
 	
 	protected void inserirNovosDadosTxT() {
+
 		if(valorAbastecimentoNovo != 0) {
+			
 			precoGasolina[nPosto + 1] = precoGasolinaNovo;
 			valorAbastecimento[nPosto + 1] = valorAbastecimentoNovo;
 			diaAbastecimento[nPosto + 1] = diaAbastecimentoNovo;

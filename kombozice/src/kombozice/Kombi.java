@@ -13,7 +13,7 @@ public class Kombi extends Posto {
 		
 		protected boolean tamanhoVetorNecessario = true;
 		
-		int tamanhoVetores = 50, n = 0;
+		protected int tamanhoVetores = 50, n = 0;
 		protected int kilometroNovo = 55696;
 		
 		protected double km_litro = 6.5;
@@ -32,6 +32,7 @@ public class Kombi extends Posto {
 		//initialize vectors
 		
 		protected void inicializacaoVetores() {
+			n = 0;
 			for(int i = 0; i < tamanhoVetores-3; i++) {
 				GasolinaNoTanque[i]=0;
 				GasolinaNoTanqueAntes[i]=0;
@@ -140,6 +141,12 @@ public class Kombi extends Posto {
 				}
 			}
 		}
+	
+		protected void lerDadosKombi() {
+			inicializacaoVetores();
+			lerKilometragem();
+			lerGasolinaNoTanque();
+		}
 		
 		protected void definirN() {
 			for(int i = 0 ; i < tamanhoVetores-1; i++) {
@@ -241,7 +248,7 @@ public class Kombi extends Posto {
 			km_litro = m;
 		}
 		
-		protected void calcularVariacaoTanque() {
+		protected void calcularVariacaoTanque(int kilometroNovo) {
 			
 			kilometragem[n] = kilometroNovo;
 
@@ -258,9 +265,9 @@ public class Kombi extends Posto {
 			
 		}
 		
-		protected void inserirValorTanque(){
+		protected void inserirValorTanque(int kilometroNovo){
 			
-			calcularVariacaoTanque();
+			calcularVariacaoTanque(kilometroNovo);
 			
 			{
 				try
@@ -289,11 +296,11 @@ public class Kombi extends Posto {
 			{
 				try
 				{
-					PrintWriter pr = new PrintWriter("fileK.txt");    
+					PrintWriter pr = new PrintWriter("ktest.txt");    
 
 					for (int i=0; i< tamanhoVetores-1; i++){
 						if(kilometragem[i] != 0) {
-							pr.println(kilometragem[i]);
+							pr.println(kilometragem[i] + " i = " + i);
 						}
 					}
 					
@@ -311,18 +318,14 @@ public class Kombi extends Posto {
 		
 		
 		
-		protected void variarTanque(){
+		protected void variarTanque(int kilometroNovo){
 			
-			inicializacaoVetores();	
 
-			
-			lerKilometragem();
-			lerGasolinaNoTanque();
 			
 			System.out.println("\nTamanho do vetor = " + tamanhoVetores);
 			calcular_km_litro();
 			
-			inserirValorTanque();
+			inserirValorTanque(kilometroNovo);
 			inserirValorKilometragem();
 			
 			//System.out.println("valor de n é " + n);
@@ -355,9 +358,11 @@ public class Kombi extends Posto {
 
 
 		
-		protected void variarKilometragem() {
-			calcularVariacaoTanque();
+		protected void variarKilometragem(int kilometroNovo) {
+			calcularVariacaoTanque(kilometroNovo);
+			
 			inserirValorKilometragem();
+			inserirValorTanque(kilometroNovo);
 			
 		}
 

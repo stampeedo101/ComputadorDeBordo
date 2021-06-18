@@ -7,12 +7,13 @@ public class ComputadorDeBordo extends FrameGuide {
 
 		//double j = 15;
 		double valorGasolina = 5.399, consumo = 6.5;
-		int kilometragem = 12345, diaAbastecimento = 5, mesAbastecimento = 7, valorAbastecimento = 50;
+		int kilometragem = 55696, diaAbastecimento = 5, mesAbastecimento = 7, valorAbastecimento = 50;
 
 		ComputadorDeBordo comp00zero = new ComputadorDeBordo();
 
 		//comp00zero.criarPanelKILOMETRAGEM();
-		comp00zero.variarTanque();
+		comp00zero.lerDadosKombi();
+		comp00zero.variarTanque(kilometragem);
 
 		//double gas, double valorGasolina, int diaAbastecimento, int mesAbastecimento, double valorAbastecimetnto, double consumo
 		comp00zero.criarCompFramePrincipal(kilometragem,comp00zero.GasolinaNoTanque[comp00zero.n],valorGasolina,diaAbastecimento,mesAbastecimento,valorAbastecimento,consumo);

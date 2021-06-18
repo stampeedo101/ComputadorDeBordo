@@ -17,7 +17,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 
 
-public class AbastecimentoSpinner {
+public class AbastecimentoSpinner extends Kombi {
 
 
 
@@ -37,50 +37,51 @@ public class AbastecimentoSpinner {
 
 		JFrame f = new JFrame("Abastecimento de Combustível");
 
-		f.setSize(720,4*tamanhoSpinner+4*tamanhoPanel+8*espacoVertical); 
+		f.setSize(720,4*tamanhoSpinner+4*tamanhoPanel+8*espacoVertical);
+		f.getContentPane().setBackground(Color.decode("#FFF88F"));
 		//3*tamanhoSpinner+3*tamanhoPanel+7*espacoVertical
 
 		//INSERIR KILOMETRAGEM
 
 		JPanel firstPanel = new JPanel();
 
-		firstPanel.setBackground(Color.decode("#003500"));
+		firstPanel.setBackground(Color.decode("#3F1D03"));
 		firstPanel.setBounds(espacoVertical, espacoVertical, 700, tamanhoPanel);
 
 		JLabel firstLabel = new JLabel();
-		firstLabel.setBackground(Color.decode("#004a93"));
+		firstLabel.setBackground(Color.decode("#3F1D03"));
 		firstLabel.setText("Kilometragem");
-		firstLabel.setForeground(Color.decode("#45ffff"));
+		firstLabel.setForeground(Color.decode("#20F400"));
 		firstLabel.setFont(new Font("Monospace",Font.PLAIN,tamanhoPanel/2));
 		firstLabel.setVerticalAlignment(JLabel.CENTER);
 		firstLabel.setHorizontalAlignment(JLabel.CENTER);
 
 		SpinnerModel value0 =  
-				new SpinnerNumberModel(0, //initial value  
+				new SpinnerNumberModel(5, //initial value  
 						0, //minimum value  
 						9, //maximum value  
 						1); //step
 
 		SpinnerModel value1 =  
-				new SpinnerNumberModel(1, //initial value  
+				new SpinnerNumberModel(5, //initial value  
 						0, //minimum value  
 						9, //maximum value  
 						1); //step
 
 		SpinnerModel value2 =  
-				new SpinnerNumberModel(2, //initial value  
+				new SpinnerNumberModel(6, //initial value  
 						0, //minimum value  
 						9, //maximum value  
 						1); //step
 
 		SpinnerModel value3 =  
-				new SpinnerNumberModel(3, //initial value  
+				new SpinnerNumberModel(9, //initial value  
 						0, //minimum value  
 						9, //maximum value  
 						1); //step
 
 		SpinnerModel value4 =  
-				new SpinnerNumberModel(4, //initial value  
+				new SpinnerNumberModel(6, //initial value  
 						0, //minimum value  
 						9, //maximum value  
 						1); //step
@@ -122,8 +123,8 @@ public class AbastecimentoSpinner {
 		JButton insertKilometragemButton = new JButton();
 
 		insertKilometragemButton.setText("INSERIR");
-		insertKilometragemButton.setBackground(Color.decode("#367f39"));
-		insertKilometragemButton.setForeground(Color.decode("#002232"));
+		insertKilometragemButton.setBackground(Color.decode("#3E67E8"));
+		insertKilometragemButton.setForeground(Color.decode("#FFFFFF"));
 		insertKilometragemButton.setFont(new Font("Monospace",Font.PLAIN,20));
 		insertKilometragemButton.setBounds((720-280)/2 + 5*tamanhoSpinner + 5*espacoVertical,2*espacoVertical+tamanhoPanel, 120, tamanhoSpinner);
 		f.add(insertKilometragemButton);
@@ -145,16 +146,37 @@ public class AbastecimentoSpinner {
 						((Integer)spinner3.getValue())*10 +
 						((Integer)spinner4.getValue()) 
 						;
+				
+				n = n + 1;
+				
+				variarKilometragem(kilometragemNova);
+				
 				/*
-				System.out.println("Value : " + 
-						spinner0.getValue() + 
-						spinner1.getValue() +
-						spinner2.getValue() +
-						spinner3.getValue() + 
-						spinner4.getValue() 
-				);  
-				 */
-				System.out.println("\nsomente a kilometragem foi modificada");
+				//
+				
+				System.out.println(kilometragemNova + " " + kilometragem[n]);
+				
+				//definirN();
+				
+				System.out.println("\n\nvalor de n = " + n +"\n\n");
+				
+
+				
+				inserirValorKilometragem();
+				variarTanque(kilometragemNova);
+				inserirValorTanque(kilometragemNova);
+				
+				*/
+				
+				System.out.println(	"\nSomente a kilometragem foi modificada com:" +
+									"\nkilometragem [" + (n-1) + 
+									"] = " + kilometragem[n-1] +
+									"\nkilometragem [" + n +
+									"] = " + kilometragem[n] +
+									" \nkilometragem[" + (n+1) +
+									"] = " + kilometragem[n+1]+
+									"\nkilometragemNova = " + kilometragemNova
+				);
 
 				f.setState(Frame.ICONIFIED);
 			}
@@ -168,14 +190,14 @@ public class AbastecimentoSpinner {
 
 		JPanel postoPanel = new JPanel();
 
-		postoPanel.setBackground(Color.decode("#003500"));
+		postoPanel.setBackground(Color.decode("#3F1D03"));
 		postoPanel.setBounds(espacoVertical, tamanhoSpinner+tamanhoPanel+3*espacoVertical, 700, tamanhoPanel);
 
 		JLabel postoLabel = new JLabel();
 
-		postoLabel.setBackground(Color.decode("#004a93"));
+		postoLabel.setBackground(Color.decode("#3F1D03"));
 		postoLabel.setText("Sigla do posto:                       Valor da Gasolina:");
-		postoLabel.setForeground(Color.decode("#45ffff"));
+		postoLabel.setForeground(Color.decode("#20F400"));
 		postoLabel.setFont(new Font("Monospace",Font.PLAIN,tamanhoPanel/2));
 		postoLabel.setVerticalAlignment(JLabel.CENTER);
 		postoLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -254,15 +276,15 @@ public class AbastecimentoSpinner {
 
 		JPanel valorAbastecimentoPanel = new JPanel();
 
-		valorAbastecimentoPanel.setBackground(Color.decode("#003500"));
+		valorAbastecimentoPanel.setBackground(Color.decode("#3F1D03"));
 		valorAbastecimentoPanel.setBounds(espacoVertical,2*tamanhoSpinner+2*tamanhoPanel+5*espacoVertical, 700, tamanhoPanel);
 
 
 		JLabel valorAbastecimentoLabel = new JLabel();
 
-		valorAbastecimentoLabel.setBackground(Color.decode("#004a93"));
+		valorAbastecimentoLabel.setBackground(Color.decode("#3F1D03"));
 		valorAbastecimentoLabel.setText("Abastecimento (R$):                                     data:            ");
-		valorAbastecimentoLabel.setForeground(Color.decode("#45ffff"));
+		valorAbastecimentoLabel.setForeground(Color.decode("#20F400"));
 		valorAbastecimentoLabel.setFont(new Font("Monospace",Font.PLAIN,tamanhoPanel/2));
 		valorAbastecimentoLabel.setHorizontalTextPosition(SwingConstants.LEFT);
 		valorAbastecimentoLabel.setVerticalAlignment(JLabel.CENTER);
@@ -337,8 +359,8 @@ public class AbastecimentoSpinner {
 		JButton insertButton = new JButton();
 
 		insertButton.setText("INSERIR NOVO ABASTECIMENTO");
-		insertButton.setBackground(Color.decode("#367f39"));
-		insertButton.setForeground(Color.decode("#002232"));
+		insertButton.setBackground(Color.decode("#3E67E8"));
+		insertButton.setForeground(Color.decode("#FFFFFF"));
 		insertButton.setFont(new Font("Monospace",Font.PLAIN,20));
 		insertButton.setBounds((720-400)/2, 3*tamanhoSpinner+3*tamanhoPanel+7*espacoVertical, 400, tamanhoSpinner);
 
