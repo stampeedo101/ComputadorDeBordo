@@ -27,7 +27,7 @@ public class Posto{
 
 	//initialize vectors
 
-	protected void inicializacaoVetores() {
+	protected void inicializacaoVetoresPosto() {
 		for(int i = 0; i < tamanhoDosVetoresPosto-3; i++) {
 			diaAbastecimento[i]=0;
 			mesAbastecimento[i]=0;
@@ -164,7 +164,32 @@ public class Posto{
 		
 	}
 	
+	protected void inserirSiglasPostoTXT(String fileName, String[] siglas, int tamanhoVetor){
+		{
+			try
+			{
+				PrintWriter pr = new PrintWriter(fileName);    
+
+				for (int i=0; i < tamanhoVetor; i++){
+					if(siglas[i].contentEquals("null")) {
+						pr.println(siglas[i]);
+					}
+					
+				}
+				
+				pr.close();
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+				System.out.println("No such file exists.");
+			}
+		}
+	}
+	
 	protected void lerDadoPosto() {
+		
+		inicializacaoVetoresPosto();
 		
 		lerDoubleInserirArquivoTxt(tamanhoDosVetoresPosto, precoGasolina, "precoGasolina.txt");
 
@@ -194,6 +219,8 @@ public class Posto{
 			inserirByteArquivoTxt("diaAbastNovo.txt", diaAbastecimento, tamanhoDosVetoresPosto);
 			inserirByteArquivoTxt("mesAbastNovo.txt", mesAbastecimento, tamanhoDosVetoresPosto);
 			inserirByteArquivoTxt("anoAbastNovo.txt", anoAbastecimento, tamanhoDosVetoresPosto);
+			
+			inserirSiglasPostoTXT("siglasNovas.txt", siglaDoPosto, tamanhoDosVetoresPosto);
 		}
 		
 	}

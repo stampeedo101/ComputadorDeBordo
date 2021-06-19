@@ -20,14 +20,7 @@ public class ComputadorDeBordo extends FrameGuide {
 
 		comp00zero.nomeDaKombosa = "Kombi";
 
-		System.out.println("\nA " + comp00zero.nomeDaKombosa + 
-				" já rodou " + comp00zero.kilometragem[comp00zero.n] +
-				" kilometros.\nTem " +
-				comp00zero.GasolinaNoTanque[comp00zero.n] +
-				" de litros de gasolina no Tanque.\nE faz " +
-				comp00zero.km_litro +
-				" kilometros por litro."
-				);
+		
 
 
 

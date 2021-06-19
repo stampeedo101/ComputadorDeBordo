@@ -215,6 +215,8 @@ public class FrameGuide extends AbastecimentoSpinner {
 				
 				//insertKilometragemNova();
 				
+				kilometragemInseridaApenas = false;
+				
 				criarSpinnerAbastecimento();
 			}
 		});
@@ -370,6 +372,33 @@ public class FrameGuide extends AbastecimentoSpinner {
 					abastecimentoMoneyLabel.setText("R$ " + valorAbastecimentoNovo);
 					kmLitroLabel.setText(dc2.format(km_litro) + " km/l");					
 				}
+				
+				if(kilometragemInseridaApenas) {
+					System.out.println("\nSaída depois do refresh (com modificação apenas na kilometragem):\nA " + nomeDaKombosa + 
+							" já rodou " + FrameGuide.this.kilometragem[n] +
+							" kilometros.\nTem " +
+							GasolinaNoTanque[n] +
+							" de litros de gasolina no Tanque.\nE faz " +
+							km_litro +
+							" kilometros por litro."
+					);
+				} else {
+					System.out.println("\nSaída depois do refresh (Abastecimento inserido):\nA " + nomeDaKombosa + 
+							" já rodou " + FrameGuide.this.kilometragem[n] +
+							" kilometros.\nTem " +
+							GasolinaNoTanque[n] +
+							" de litros de gasolina no Tanque.\nE faz " +
+							km_litro +
+							" kilometros por litro.\nNova data de abastecimento " + 
+							FrameGuide.this.diaAbastecimento[nPosto] +
+							"/" + FrameGuide.this.mesAbastecimento[nPosto] +
+							"/" + anoAbastecimento[nPosto] +
+							" .\nO valor do novo Abastecimento foi de R$ " + valorAbastecimento[nPosto] +
+							",00. A sigla do posto é " + siglaDoPosto[nPosto] +
+							". O preço da gasolina no posto é " + dc3.format(precoGasolina[nPosto])
+					);
+				}
+
 				
 				tanqueSlider.setValue((int) Math.round(GasolinaNoTanque[n])); //inserir valor slider
 				

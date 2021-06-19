@@ -31,7 +31,7 @@ public class AbastecimentoSpinner extends Kombi {
 
 	int valorAbastecimentoNovo = 0, diaAbastecimentoNovo=1, mesAbastecimentoNovo=1, anoAbastecimentoNovo=20;
 	
-	boolean kilometragemNovaEntrou = false;
+	boolean kilometragemNovaEntrou = false, kilometragemInseridaApenas = false;
 
 	protected void criarSpinnerAbastecimento() {
 
@@ -151,23 +151,6 @@ public class AbastecimentoSpinner extends Kombi {
 				
 				variarKilometragem(kilometragemNova);
 				
-				/*
-				//
-				
-				System.out.println(kilometragemNova + " " + kilometragem[n]);
-				
-				//definirN();
-				
-				System.out.println("\n\nvalor de n = " + n +"\n\n");
-				
-
-				
-				inserirValorKilometragem();
-				variarTanque(kilometragemNova);
-				inserirValorTanque(kilometragemNova);
-				
-				*/
-				
 				System.out.println(	"\nSomente a kilometragem foi modificada com:" +
 									"\nkilometragem [" + (n-1) + 
 									"] = " + kilometragem[n-1] +
@@ -177,6 +160,8 @@ public class AbastecimentoSpinner extends Kombi {
 									"] = " + kilometragem[n+1]+
 									"\nkilometragemNova = " + kilometragemNova
 				);
+				
+				kilometragemInseridaApenas = true;
 
 				f.setState(Frame.ICONIFIED);
 			}
@@ -400,6 +385,12 @@ public class AbastecimentoSpinner extends Kombi {
 				mesAbastecimentoNovo = (Integer)mesDataSpinner.getValue();
 
 				anoAbastecimentoNovo = (Integer)anoDataSpinner.getValue();
+				
+				n = n + 1;
+				
+				variarKilometragem(kilometragemNova);
+				
+				inserirNovosDadosTxT();
 
 
 				System.out.println("\nNovo Abastecimento realizado com a sigla do posto " +
