@@ -18,22 +18,66 @@ import javax.swing.JSlider;
 public class FrameGuide extends AbastecimentoSpinner {
 	
 	DecimalFormat dc2 = new DecimalFormat("0.00");
-	DecimalFormat dc3 = new DecimalFormat("0.000");
+	DecimalFormat dc3 = new DecimalFormat("0.000");	
 	
 	public void executarAcaoInsert(MouseEvent ae) {
 		
 	}
 	
+	protected void setKilometragemSpinner() {
+		//FrameGuide.this.kilo
+	}
+	
+	protected String formatarKilometragem(int kilometragemInt) {
+		
+		String kilometragemFormatada = String.valueOf(kilometragemInt);
+
+		String esquerda = new String();
+		String direita = new String();
+		
+		for(int i = kilometragemFormatada.length() - 3; i < kilometragemFormatada.length();i++) {
+			direita = direita + kilometragemFormatada.charAt(i);
+		}		
+		
+		if(kilometragemInt < 100000) {
+			esquerda = "0";
+			for(int i = 0; i < 2; i++) {
+				esquerda = esquerda + kilometragemFormatada.charAt(i);
+			}
+		} else {
+			for(int i = 0; i < 3; i++) {
+				esquerda = esquerda + kilometragemFormatada.charAt(i);
+			}
+		}
+		
+		return (esquerda + " " + direita);
+	}
+	
+	protected String formataroDiaMes(int nPosto) {
+		if(diaAbastecimento[nPosto]<10 && mesAbastecimento[nPosto]>9) {
+			return ("0" + diaAbastecimento[nPosto] + "/" + mesAbastecimento[nPosto] + "/" + anoAbastecimento[nPosto]);
+		}else if(diaAbastecimento[nPosto]>9 && mesAbastecimento[nPosto]<10) {
+			return (diaAbastecimento[nPosto] + "/0" + mesAbastecimento[nPosto] + "/" + anoAbastecimento[nPosto]);
+		}else if(diaAbastecimento[nPosto]<10 && mesAbastecimento[nPosto]<10) {
+			return ("0" + diaAbastecimento[nPosto] + "/0" + mesAbastecimento[nPosto] + "/" + anoAbastecimento[nPosto]);
+		} else {
+			return (diaAbastecimento[nPosto] + "/" + mesAbastecimento[nPosto] + "/" + anoAbastecimento[nPosto]);
+		}
+	}
 	
 	
 	
-	protected void criarCompFramePrincipal(int kilometragem, double gas, double valorGasolina, int diaAbastecimento, int mesAbastecimento, int valorAbastecimetnto, double consumo) {
+	
+	protected void criarCompFramePrincipal() {
 		
 		int jFrameWidth = 720, widthPanel = 700;
 		int jFrameHight = 1080, heightPanel = 100;
+		
+		String kilometragemFormatada = new String();
+		kilometragemFormatada = "null";
 
-		JFrame frame = new JFrame();	
-
+		JFrame frame = new JFrame();		
+		
 		frame.setTitle("KOMBI");
 
 		//about size, color and visibility of window
@@ -44,6 +88,13 @@ public class FrameGuide extends AbastecimentoSpinner {
 
 		frame.getContentPane().setBackground(Color.decode("#fff88f"));
 		frame.setLocationRelativeTo(null);
+		
+		//ler dados
+		
+		lerDadosKombi();
+		lerDadoPosto();
+		
+		//ler dados
 
 		/*KILOMETRAGEM PANEL*/
 
@@ -55,26 +106,7 @@ public class FrameGuide extends AbastecimentoSpinner {
 		
 		JLabel kilometragemLabel = new JLabel();
 		
-		String s = String.valueOf(kilometragem);
-		String esquerda = new String();
-		String direita = new String();
-		
-		for(int i = s.length() - 3; i < s.length();i++) {
-			direita = direita + s.charAt(i);
-		}		
-		
-		if(kilometragem < 100000) {
-			esquerda = "0";
-			for(int i = 0; i < 2; i++) {
-				esquerda = esquerda + s.charAt(i);
-			}
-		} else {
-			for(int i = 0; i < 3; i++) {
-				esquerda = esquerda + s.charAt(i);
-			}
-		}
-		
-		kilometragemLabel.setText(esquerda + " " + direita);
+		kilometragemLabel.setText(formatarKilometragem(kilometragem[contadorKombi]));
 		kilometragemLabel.setForeground(Color.white);
 		kilometragemLabel.setFont(new Font("Monospace",Font.PLAIN,90));
 		//kilometragemLabel.setVerticalAlignment((JLabel.CENTER);
@@ -88,13 +120,13 @@ public class FrameGuide extends AbastecimentoSpinner {
 
 		JPanel tanquePanel = new JPanel();
 
-		if(gas > 0 && gas <= 10) {
+		if(GasolinaNoTanque[contadorKombi] > 0 && GasolinaNoTanque[contadorKombi] <= 10) {
 			tanquePanel.setBackground(Color.red);			
-		}else if(gas > 10 && gas <= 20){
+		}else if(GasolinaNoTanque[contadorKombi] > 10 && GasolinaNoTanque[contadorKombi] <= 20){
 			tanquePanel.setBackground(Color.orange);
-		}else if(gas > 20 && gas <= 30){
+		}else if(GasolinaNoTanque[contadorKombi] > 20 && GasolinaNoTanque[contadorKombi] <= 30){
 			tanquePanel.setBackground(Color.green);	
-		}else if(gas > 30 && gas <= 40){
+		}else if(GasolinaNoTanque[contadorKombi] > 30 && GasolinaNoTanque[contadorKombi] <= 40){
 			tanquePanel.setBackground(Color.blue);
 		}
 
@@ -167,34 +199,11 @@ public class FrameGuide extends AbastecimentoSpinner {
 
 		/*TANQUE PANEL*/
 
-
-	/* BOTÃO ABASTECIMENTO */	
-		
-		/*
-		JButton abastecimentoButton = new JButton("A");
-		
-		abastecimentoButton.setBackground(Color.decode("#367f39"));
-		abastecimentoButton.setForeground(Color.decode("#002232"));
-		abastecimentoButton.setBounds(10, 220, 50, 50);
-		
-		abastecimentoButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				System.out.println("Abastecimento foi clicado.");
-				criarSpinnerAbastecimento();
-				
-			}
-		});
-		*/
-		
-		
-		/* BOTÃO ABASTECIMENTO */
+        
+        
 
 		
-		
-		/* BOTÃO INSERT*/
+		/* BOTÃO INSERT +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
 		JButton insertButton = new JButton();
 		
@@ -222,13 +231,11 @@ public class FrameGuide extends AbastecimentoSpinner {
 			}
 		});
 
-		/* BOTÃO INSERT*/
+		/* BOTÃO INSERT +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 		
 		
 		
-
-
-
+		
 
 		/* NOME DO POSTO E VALOR DA GAS */
 
@@ -238,7 +245,7 @@ public class FrameGuide extends AbastecimentoSpinner {
 
 		JLabel nomePostoValorGasolinaLabel = new JLabel();
 		nomePostoValorGasolinaLabel.setBackground(Color.decode("#004a93"));
-		nomePostoValorGasolinaLabel.setText("brC R$ " + valorGasolina);
+		nomePostoValorGasolinaLabel.setText("brC R$ " + precoGasolina[nPosto]);
 		nomePostoValorGasolinaLabel.setForeground(Color.decode("#ffffff"));
 		nomePostoValorGasolinaLabel.setFont(new Font("Monospace",Font.PLAIN,90));
 		nomePostoValorGasolinaLabel.setVerticalAlignment(JLabel.CENTER);
@@ -257,15 +264,8 @@ public class FrameGuide extends AbastecimentoSpinner {
 		JLabel abastecimentoDateLabel = new JLabel();
 		abastecimentoDateLabel.setBackground(Color.decode("#004a93"));
 		
-		if(diaAbastecimento<10 && mesAbastecimento>9) {
-			abastecimentoDateLabel.setText("0" + diaAbastecimento + "/" + mesAbastecimento);
-		}else if(diaAbastecimento>9 && mesAbastecimento<10) {
-			abastecimentoDateLabel.setText(diaAbastecimento + "/0" + mesAbastecimento);
-		}else if(diaAbastecimento<10 && mesAbastecimento<10) {
-			abastecimentoDateLabel.setText("0" + diaAbastecimento + "/0" + mesAbastecimento);
-		} else {
-			abastecimentoDateLabel.setText(diaAbastecimento + "/" + mesAbastecimento);
-		}
+
+		abastecimentoDateLabel.setText(formataroDiaMes(nPosto));
 
 	
 		abastecimentoDateLabel.setForeground(Color.decode("#ffffff"));
@@ -286,7 +286,7 @@ public class FrameGuide extends AbastecimentoSpinner {
 		JLabel abastecimentoMoneyLabel = new JLabel();
 		abastecimentoMoneyLabel.setBackground(Color.decode("#004a93"));
 		
-		abastecimentoMoneyLabel.setText("R$ " + valorAbastecimetnto + ".00");
+		abastecimentoMoneyLabel.setText("R$ " + valorAbastecimento[nPosto] + ".00");
 		abastecimentoMoneyLabel.setForeground(Color.decode("#ffffff"));
 		abastecimentoMoneyLabel.setFont(new Font("Monospace",Font.PLAIN,90));
 		abastecimentoMoneyLabel.setVerticalAlignment(JLabel.CENTER);
@@ -305,8 +305,9 @@ public class FrameGuide extends AbastecimentoSpinner {
 		JLabel kmLitroLabel = new JLabel();
 		kmLitroLabel.setBackground(Color.decode("#004a93"));
 		
+		calcular_km_litro();
 		
-		kmLitroLabel.setText(consumo + " km/l");
+		kmLitroLabel.setText(dc2.format(km_litro) + " km/l");
 		kmLitroLabel.setForeground(Color.decode("#ffffff"));
 		kmLitroLabel.setFont(new Font("Monospace",Font.PLAIN,90));
 		kmLitroLabel.setVerticalAlignment(JLabel.CENTER);
@@ -341,7 +342,9 @@ public class FrameGuide extends AbastecimentoSpinner {
 		//DESENHO
 
 		
-		/* BOTÃO REFRESH */	
+		
+		
+		/* BOTÃO REFRESH +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/	
 		
 		Icon refreshIcon = new ImageIcon("refreshButton3.png");
 		
@@ -360,9 +363,9 @@ public class FrameGuide extends AbastecimentoSpinner {
 				
 				//Display KilometragemNova();
 				if(kilometragemNova != 0 ) {
-					kilometragemLabel.setText("0" + kilometragemNova);
+					kilometragemLabel.setText(formatarKilometragem(kilometragemNova));
 					//inserirValorKilometragem();
-					//FrameGuide.this.kilometragem[n] = kilometragemNova;
+					//FrameGuide.this.kilometragem[contadorKombi] = kilometragemNova;
 				}
 				
 				//Display Abastecimento novo
@@ -377,18 +380,18 @@ public class FrameGuide extends AbastecimentoSpinner {
 				
 				if(kilometragemInseridaApenas) {
 					System.out.println("\nSaída depois do refresh (com modificação apenas na kilometragem):\nA " + nomeDaKombosa + 
-							" já rodou " + FrameGuide.this.kilometragem[n] +
+							" já rodou " + FrameGuide.this.kilometragem[contadorKombi] +
 							" kilometros.\nTem " +
-							GasolinaNoTanque[n] +
+							GasolinaNoTanque[contadorKombi] +
 							" de litros de gasolina no Tanque.\nE faz " +
 							km_litro +
 							" kilometros por litro."
 					);
 				} else {
 					System.out.println("\nSaída depois do refresh (Abastecimento inserido):\nA " + nomeDaKombosa + 
-							" já rodou " + FrameGuide.this.kilometragem[n] +
+							" já rodou " + FrameGuide.this.kilometragem[contadorKombi] +
 							" kilometros.\nTem " +
-							GasolinaNoTanque[n] +
+							GasolinaNoTanque[contadorKombi] +
 							" de litros de gasolina no Tanque.\nE faz " +
 							km_litro +
 							" kilometros por litro.\nNova data de abastecimento " + 
@@ -402,16 +405,16 @@ public class FrameGuide extends AbastecimentoSpinner {
 				}
 
 				if(botaoAbastecimentoClicado) {
-					tanqueSlider.setValue((int) Math.round(GasolinaNoTanque[n+1])); //inserir valor slider
+					tanqueSlider.setValue((int) Math.round(GasolinaNoTanque[contadorKombi+1])); //inserir valor slider
 				}else {
-					tanqueSlider.setValue((int) Math.round(GasolinaNoTanque[n])); //inserir valor slider
+					tanqueSlider.setValue((int) Math.round(GasolinaNoTanque[contadorKombi])); //inserir valor slider
 				}
 				
 				
 			}
 		});
 		
-		/* BOTÃO REFRESH */
+		/* BOTÃO REFRESH +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 
 		/* INSERT LABELS*/

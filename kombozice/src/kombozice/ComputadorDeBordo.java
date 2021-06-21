@@ -16,7 +16,7 @@ public class ComputadorDeBordo extends FrameGuide {
 		comp00zero.variarTanque(kilometragem);
 
 		//double gas, double valorGasolina, int diaAbastecimento, int mesAbastecimento, double valorAbastecimetnto, double consumo
-		comp00zero.criarCompFramePrincipal(kilometragem,comp00zero.GasolinaNoTanque[comp00zero.n],valorGasolina,diaAbastecimento,mesAbastecimento,valorAbastecimento,consumo);
+		comp00zero.criarCompFramePrincipal();
 
 		comp00zero.nomeDaKombosa = "Kombi";
 
@@ -35,7 +35,7 @@ public class ComputadorDeBordo extends FrameGuide {
 		/* comp00zero EXTENDS
 				comp00zero.variarTanque();
 
-				System.out.println("\n[" + comp00zero.n +"] o valor de \tkilometragem = " + 
+				System.out.println("\contadorKombi[" + comp00zero.n +"] o valor de \tkilometragem = " + 
 									comp00zero.kilometragem[comp00zero.n-1] +
 									" km Quantidade de gasolina no tanque = " 
 						);
@@ -44,7 +44,7 @@ public class ComputadorDeBordo extends FrameGuide {
 		//ler datas,precos ..., referentes ao posto
 		comp00zero.lerDadoPosto();
 
-		System.out.println("\n\n\nO valor de precoGasolina é " + comp00zero.precoGasolina[0] +
+		System.out.println("\ncontadorKombi\ncontadorKombi\nO valor de precoGasolina é " + comp00zero.precoGasolina[0] +
 				" E o valor do abastecimento é " + comp00zero.valorAbastecimento[0] +
 				" E o valor do ano é 20" + comp00zero.anoAbastecimento[0] + 
 				" E a sigla do posto 0 é " + comp00zero.siglaDoPosto[0]

@@ -13,7 +13,7 @@ public class Kombi extends Posto {
 		
 		protected boolean tamanhoVetorNecessario = true, refreshAindaNãoClicado = true;
 		
-		protected int tamanhoVetores = 50, n = 0;
+		protected int tamanhoVetores = 50, contadorKombi = 0;
 		protected int kilometroNovo = 55696;
 		
 		protected double km_litro = 6.5;
@@ -34,7 +34,7 @@ public class Kombi extends Posto {
 		//initialize vectors
 		
 		protected void inicializacaoVetoresKombi() {
-			n = 0;
+			contadorKombi = 0;
 			for(int i = 0; i < tamanhoVetores-3; i++) {
 				GasolinaNoTanque[i]=0;
 				GasolinaNoTanqueAntes[i]=0;
@@ -57,6 +57,7 @@ public class Kombi extends Posto {
 					
 					if(x.hasNextInt()) {
 						kilometragem[i] = x.nextInt();
+						contadorKombi = i;
 					}				
 
 				}
@@ -109,8 +110,8 @@ public class Kombi extends Posto {
 				if(kilometragem[i] != 0){
 					//System.out.println("k e g diferente de zero com [" + i + "]" );
 				} else {
-					n = i; //não sei como mas sai o n sem precisar colocar o i + 1
-					System.out.println("\nk e g vazios (=0) no  tamanhoVetores[" + i +"] e n recebe " + i);
+					contadorKombi = i; //não sei como mas sai o contadorKombi sem precisar colocar o i + 1
+					System.out.println("\nk e g vazios (=0) no  tamanhoVetores[" + i +"] e contadorKombi recebe " + i);
 					return;
 				}
 			}
@@ -153,7 +154,7 @@ public class Kombi extends Posto {
 
 			}
 			
-			m = (n * sumGasolinaVsKilometragem - sumGasolina * sumKilometragem) / (n*sumGasolina2 - sumGasolina*sumGasolina) ;
+			m = (contadorKombi * sumGasolinaVsKilometragem - sumGasolina * sumKilometragem) / (contadorKombi*sumGasolina2 - sumGasolina*sumGasolina) ;
 			
 			//System.out.println("valor de m é " + m);
 			
@@ -166,7 +167,7 @@ public class Kombi extends Posto {
 
 			double buro = (double) kilometroNovo;
 			//definirN();
-			//System.out.println("valor de [n] e [n -1] "+ n + " " + (n-1));
+			//System.out.println("valor de [contadorKombi] e [contadorKombi -1] "+ contadorKombi + " " + (contadorKombi-1));
 			
 			GasolinaNoTanque[n] = GasolinaNoTanque[n-1]-(buro - kilometragem[n-1])/km_litro;
 			
@@ -243,9 +244,9 @@ public class Kombi extends Posto {
 			inserirValorTanque(kilometroNovo);
 			inserirValorKilometragem();
 			
-			//System.out.println("valor de n é " + n);
+			//System.out.println("valor de contadorKombi é " + contadorKombi);
 			
-			if(kilometragem[n] != 0 && GasolinaNoTanque[n] !=0) {
+			if(kilometragem[contadorKombi] != 0 && GasolinaNoTanque[contadorKombi] !=0) {
 
 				/*
 				System.out.println("\no valor de kilometragem[" + 
@@ -278,7 +279,7 @@ public class Kombi extends Posto {
 
 		
 		protected void variarKilometragem(int kilometroNovo) {
-			calcularVariacaoTanque(kilometroNovo,n);
+			calcularVariacaoTanque(kilometroNovo,contadorKombi);
 			
 			inserirValorKilometragem();
 			inserirValorTanque(kilometroNovo);

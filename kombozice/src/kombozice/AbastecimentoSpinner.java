@@ -31,7 +31,7 @@ public class AbastecimentoSpinner extends Kombi {
 
 	int valorAbastecimentoNovo = 0, diaAbastecimentoNovo=1, mesAbastecimentoNovo=1, anoAbastecimentoNovo=20;
 	
-	boolean kilometragemNovaEntrou = false, kilometragemInseridaApenas = false, botaoAbastecimentoClicado = false;
+	boolean kilometragemNovaEntrou = false, kilometragemInseridaApenas = false, botaoAbastecimentoClicado = false;	
 
 	protected void criarSpinnerAbastecimento() {
 
@@ -56,67 +56,67 @@ public class AbastecimentoSpinner extends Kombi {
 		firstLabel.setVerticalAlignment(JLabel.CENTER);
 		firstLabel.setHorizontalAlignment(JLabel.CENTER);
 
-		SpinnerModel value0 =  
+		SpinnerModel kilometragemSpinnerValue0 =  
 				new SpinnerNumberModel(5, //initial value  
 						0, //minimum value  
 						9, //maximum value  
 						1); //step
 
-		SpinnerModel value1 =  
+		SpinnerModel kilometragemSpinnerValue1 =  
 				new SpinnerNumberModel(5, //initial value  
 						0, //minimum value  
 						9, //maximum value  
 						1); //step
 
-		SpinnerModel value2 =  
+		SpinnerModel kilometragemSpinnerValue2 =  
 				new SpinnerNumberModel(6, //initial value  
 						0, //minimum value  
 						9, //maximum value  
 						1); //step
 
-		SpinnerModel value3 =  
+		SpinnerModel kilometragemSpinnerValue3 =  
 				new SpinnerNumberModel(9, //initial value  
 						0, //minimum value  
 						9, //maximum value  
 						1); //step
 
-		SpinnerModel value4 =  
+		SpinnerModel kilometragemSpinnerValue4 =  
 				new SpinnerNumberModel(6, //initial value  
 						0, //minimum value  
 						9, //maximum value  
 						1); //step
 
-		JSpinner spinner0 = new JSpinner(value0);
+		JSpinner kilometragemSpinner0 = new JSpinner(kilometragemSpinnerValue0);
 
-		spinner0.setBounds((720-280)/2-50,2*espacoVertical+tamanhoPanel,tamanhoSpinner,tamanhoSpinner);
+		kilometragemSpinner0.setBounds((720-280)/2-50,2*espacoVertical+tamanhoPanel,tamanhoSpinner,tamanhoSpinner);
 
-		spinner0.setFont(new Font("Monospace",Font.PLAIN,50));
-		f.add(spinner0);
+		kilometragemSpinner0.setFont(new Font("Monospace",Font.PLAIN,50));
+		f.add(kilometragemSpinner0);
 
 
-		JSpinner spinner1 = new JSpinner(value1);
+		JSpinner kilometragemSpinner1 = new JSpinner(kilometragemSpinnerValue1);
 
-		spinner1.setBounds((720-280)/2 + 2*espacoVertical,2*espacoVertical+tamanhoPanel,tamanhoSpinner,tamanhoSpinner);	            
-		spinner1.setFont(new Font("Monospace",Font.PLAIN,50));
-		f.add(spinner1);
+		kilometragemSpinner1.setBounds((720-280)/2 + 2*espacoVertical,2*espacoVertical+tamanhoPanel,tamanhoSpinner,tamanhoSpinner);	            
+		kilometragemSpinner1.setFont(new Font("Monospace",Font.PLAIN,50));
+		f.add(kilometragemSpinner1);
 
-		JSpinner spinner2 = new JSpinner(value2);
+		JSpinner kilometragemSpinner2 = new JSpinner(kilometragemSpinnerValue2);
 
-		spinner2.setBounds((720-280)/2 + tamanhoSpinner + 3*espacoVertical,2*espacoVertical+tamanhoPanel,tamanhoSpinner,tamanhoSpinner);	            
-		spinner2.setFont(new Font("Monospace",Font.PLAIN,50));
-		f.add(spinner2);
+		kilometragemSpinner2.setBounds((720-280)/2 + tamanhoSpinner + 3*espacoVertical,2*espacoVertical+tamanhoPanel,tamanhoSpinner,tamanhoSpinner);	            
+		kilometragemSpinner2.setFont(new Font("Monospace",Font.PLAIN,50));
+		f.add(kilometragemSpinner2);
 
-		JSpinner spinner3 = new JSpinner(value3);
+		JSpinner kilometragemSpinner3 = new JSpinner(kilometragemSpinnerValue3);
 
-		spinner3.setBounds((720-280)/2 + 2*tamanhoSpinner+ 4*espacoVertical,2*espacoVertical+tamanhoPanel,tamanhoSpinner,tamanhoSpinner);	            
-		spinner3.setFont(new Font("Monospace",Font.PLAIN,50));
-		f.add(spinner3);
+		kilometragemSpinner3.setBounds((720-280)/2 + 2*tamanhoSpinner+ 4*espacoVertical,2*espacoVertical+tamanhoPanel,tamanhoSpinner,tamanhoSpinner);	            
+		kilometragemSpinner3.setFont(new Font("Monospace",Font.PLAIN,50));
+		f.add(kilometragemSpinner3);
 
-		JSpinner spinner4 = new JSpinner(value4);
+		JSpinner kilometragemSpinner4 = new JSpinner(kilometragemSpinnerValue4);
 
-		spinner4.setBounds((720-280)/2 + 3*tamanhoSpinner + 5*espacoVertical,2*espacoVertical+tamanhoPanel,tamanhoSpinner,tamanhoSpinner);	            
-		spinner4.setFont(new Font("Monospace",Font.PLAIN,50));
-		f.add(spinner4);
+		kilometragemSpinner4.setBounds((720-280)/2 + 3*tamanhoSpinner + 5*espacoVertical,2*espacoVertical+tamanhoPanel,tamanhoSpinner,tamanhoSpinner);	            
+		kilometragemSpinner4.setFont(new Font("Monospace",Font.PLAIN,50));
+		f.add(kilometragemSpinner4);
 
 		// (720-280)/2 = 360-190=170
 
@@ -140,28 +140,29 @@ public class AbastecimentoSpinner extends Kombi {
 
 
 
-				kilometragemNova = ((Integer)spinner0.getValue())*10*1000 + 
-						((Integer)spinner1.getValue())*1000 + 
-						((Integer)spinner2.getValue())*100 + 
-						((Integer)spinner3.getValue())*10 +
-						((Integer)spinner4.getValue()) 
+				kilometragemNova = 
+						((Integer)kilometragemSpinner0.getValue())*10*1000 + 
+						((Integer)kilometragemSpinner1.getValue())*1000 + 
+						((Integer)kilometragemSpinner2.getValue())*100 + 
+						((Integer)kilometragemSpinner3.getValue())*10 +
+						((Integer)kilometragemSpinner4.getValue()) 
 						;
 				
-				System.out.println("\nN antes do +1 = " + n);
+				System.out.println("\nN antes do +1 = " + contadorKombi);
 				
 				variarKilometragem(kilometroNovo);
 				
-				n = n + 1;
+				contadorKombi = contadorKombi + 1;
 				
 				variarKilometragem(kilometroNovo);
 				
 				System.out.println(	"\nSomente a kilometragem foi modificada com:" +
-									"\nkilometragem [" + (n-1) + 
-									"] = " + kilometragem[n-1] +
-									"\nkilometragem [" + n +
-									"] = " + kilometragem[n] +
-									" \nkilometragem[" + (n+1) +
-									"] = " + kilometragem[n+1]+
+									"\nkilometragem [" + (contadorKombi-1) + 
+									"] = " + kilometragem[contadorKombi-1] +
+									"\nkilometragem [" + contadorKombi +
+									"] = " + kilometragem[contadorKombi] +
+									" \nkilometragem[" + (contadorKombi+1) +
+									"] = " + kilometragem[contadorKombi+1]+
 									"\nkilometragemNova = " + kilometragemNova
 				);
 				
@@ -206,57 +207,57 @@ public class AbastecimentoSpinner extends Kombi {
 
 		//INSERIR VALO GASOLINA
 
-		SpinnerModel gValue0 =  
+		SpinnerModel gasolinaSpinnerValue0 =  
 				new SpinnerNumberModel(5, //initial value  
 						0, //minimum value  
 						9, //maximum value  
 						1); //step
 
-		JSpinner gasolina0 = new JSpinner(gValue0);
+		JSpinner gasolinaSpinner0 = new JSpinner(gasolinaSpinnerValue0);
 
-		gasolina0.setBounds(6*tamanhoSpinner,tamanhoSpinner+2*tamanhoPanel+4*espacoVertical,tamanhoSpinner,tamanhoSpinner);
+		gasolinaSpinner0.setBounds(6*tamanhoSpinner,tamanhoSpinner+2*tamanhoPanel+4*espacoVertical,tamanhoSpinner,tamanhoSpinner);
 
-		gasolina0.setFont(new Font("Monospace",Font.PLAIN,50));
-		f.add(gasolina0);
+		gasolinaSpinner0.setFont(new Font("Monospace",Font.PLAIN,50));
+		f.add(gasolinaSpinner0);
 
-		SpinnerModel gValue1 =  
+		SpinnerModel gasolinaSpinnerValue1 =  
 				new SpinnerNumberModel(1, //initial value  
 						0, //minimum value  
 						9, //maximum value  
 						1); //step
 
-		JSpinner gasolina1 = new JSpinner(gValue1);
+		JSpinner gasolinaSpinner1 = new JSpinner(gasolinaSpinnerValue1);
 
-		gasolina1.setBounds(6*tamanhoSpinner+tamanhoSpinner+espacoVertical,tamanhoSpinner+2*tamanhoPanel+4*espacoVertical,tamanhoSpinner,tamanhoSpinner);
+		gasolinaSpinner1.setBounds(6*tamanhoSpinner+tamanhoSpinner+espacoVertical,tamanhoSpinner+2*tamanhoPanel+4*espacoVertical,tamanhoSpinner,tamanhoSpinner);
 
-		gasolina1.setFont(new Font("Monospace",Font.PLAIN,50));
-		f.add(gasolina1);
+		gasolinaSpinner1.setFont(new Font("Monospace",Font.PLAIN,50));
+		f.add(gasolinaSpinner1);
 
-		SpinnerModel gValue2 =  
+		SpinnerModel gasolinaSpinnerValue2 =  
 				new SpinnerNumberModel(2, //initial value  
 						0, //minimum value  
 						9, //maximum value  
 						1); //step
 
-		JSpinner gasolina2 = new JSpinner(gValue2);
+		JSpinner gasolinaSpinner2 = new JSpinner(gasolinaSpinnerValue2);
 
-		gasolina2.setBounds(6*tamanhoSpinner+2*tamanhoSpinner+2*espacoVertical,tamanhoSpinner+2*tamanhoPanel+4*espacoVertical,tamanhoSpinner,tamanhoSpinner);
+		gasolinaSpinner2.setBounds(6*tamanhoSpinner+2*tamanhoSpinner+2*espacoVertical,tamanhoSpinner+2*tamanhoPanel+4*espacoVertical,tamanhoSpinner,tamanhoSpinner);
 
-		gasolina2.setFont(new Font("Monospace",Font.PLAIN,50));
-		f.add(gasolina2);
+		gasolinaSpinner2.setFont(new Font("Monospace",Font.PLAIN,50));
+		f.add(gasolinaSpinner2);
 
-		SpinnerModel gValue3 =  
+		SpinnerModel gasolinaSpinnerValue3 =  
 				new SpinnerNumberModel(3, //initial value  
 						0, //minimum value  
 						9, //maximum value  
 						1); //step
 
-		JSpinner gasolina3 = new JSpinner(gValue3);
+		JSpinner gasolinaSpinner3 = new JSpinner(gasolinaSpinnerValue3);
 
-		gasolina3.setBounds(6*tamanhoSpinner+3*tamanhoSpinner+3*espacoVertical,tamanhoSpinner+2*tamanhoPanel+4*espacoVertical,tamanhoSpinner,tamanhoSpinner);
+		gasolinaSpinner3.setBounds(6*tamanhoSpinner+3*tamanhoSpinner+3*espacoVertical,tamanhoSpinner+2*tamanhoPanel+4*espacoVertical,tamanhoSpinner,tamanhoSpinner);
 
-		gasolina3.setFont(new Font("Monospace",Font.PLAIN,50));
-		f.add(gasolina3);
+		gasolinaSpinner3.setFont(new Font("Monospace",Font.PLAIN,50));
+		f.add(gasolinaSpinner3);
 
 		//INSERIR VALO GASOLINA
 
@@ -366,21 +367,21 @@ public class AbastecimentoSpinner extends Kombi {
 
 
 
-				kilometragemNova = ((Integer)spinner0.getValue())*10*1000 + 
-						((Integer)spinner1.getValue())*1000 + 
-						((Integer)spinner2.getValue())*100 + 
-						((Integer)spinner3.getValue())*10 +
-						((Integer)spinner4.getValue()) 
+				kilometragemNova = ((Integer)kilometragemSpinner0.getValue())*10*1000 + 
+						((Integer)kilometragemSpinner1.getValue())*1000 + 
+						((Integer)kilometragemSpinner2.getValue())*100 + 
+						((Integer)kilometragemSpinner3.getValue())*10 +
+						((Integer)kilometragemSpinner4.getValue()) 
 						;
 				
 
 
 				siglaPostoNovo = (String) SiglasPosto.getValue();
 
-				precoGasolinaNovo = ((Integer)gValue0.getValue()) +
-						((double)((Integer)gValue1.getValue()))/10 +
-						((double)((Integer)gValue2.getValue()))/100 +
-						((double)((Integer)gValue3.getValue()))/1000
+				precoGasolinaNovo = ((Integer)gasolinaSpinnerValue0.getValue()) +
+						((double)((Integer)gasolinaSpinnerValue1.getValue()))/10 +
+						((double)((Integer)gasolinaSpinnerValue2.getValue()))/100 +
+						((double)((Integer)gasolinaSpinnerValue3.getValue()))/1000
 						;
 
 				valorAbastecimentoNovo = (Integer)valorAbastecimentoSpinner.getValue();
@@ -391,15 +392,15 @@ public class AbastecimentoSpinner extends Kombi {
 
 				anoAbastecimentoNovo = (Integer)anoDataSpinner.getValue();
 				
-				System.out.println("\nn antes de (n+1) = " + n);
+				System.out.println("\nn antes de (contadorKombi+1) = " + contadorKombi);
 				
-				System.out.println(	"\ngasolinanotanque [" + (n + 1) + "] = " + GasolinaNoTanque[n+1] +
-						"\ngasolinanotanque [" + n +"] = " + GasolinaNoTanque[n] +
-						"\ngasolinanotanque [" + (n - 1) + "] = " + GasolinaNoTanque[n-1] +
+				System.out.println(	"\ngasolinanotanque [" + (contadorKombi + 1) + "] = " + GasolinaNoTanque[contadorKombi+1] +
+						"\ngasolinanotanque [" + contadorKombi +"] = " + GasolinaNoTanque[contadorKombi] +
+						"\ngasolinanotanque [" + (contadorKombi - 1) + "] = " + GasolinaNoTanque[contadorKombi-1] +
 						"\ne uma parada = "+ ((double)valorAbastecimentoNovo)/precoGasolinaNovo
 						);
 				
-				n = n + 1;
+				contadorKombi = contadorKombi + 1;
 				
 				
 				
@@ -413,9 +414,9 @@ public class AbastecimentoSpinner extends Kombi {
 				
 				inserirNovosDadosTxT();
 				
-				System.out.println(	"\ngasolinanotanque [" + (n + 1) + "] = " + GasolinaNoTanque[n+1] +
-									"\ngasolinanotanque [" + n +"] = " + GasolinaNoTanque[n] +
-									"\ngasolinanotanque [" + (n - 1) + "] = " + GasolinaNoTanque[n-1] +
+				System.out.println(	"\ngasolinanotanque [" + (contadorKombi + 1) + "] = " + GasolinaNoTanque[contadorKombi+1] +
+									"\ngasolinanotanque [" + contadorKombi +"] = " + GasolinaNoTanque[contadorKombi] +
+									"\ngasolinanotanque [" + (contadorKombi - 1) + "] = " + GasolinaNoTanque[contadorKombi-1] +
 									"\ne uma parada = "+ ((double)valorAbastecimentoNovo)/precoGasolinaNovo
 				);
 				
@@ -423,10 +424,10 @@ public class AbastecimentoSpinner extends Kombi {
 				
 				
 				
-				inserirDoubleArquivoTxt("gasolinaAbastecimento.txt", GasolinaNoTanque, n+1);
+				inserirDoubleArquivoTxt("gasolinaAbastecimento.txt", GasolinaNoTanque, contadorKombi+1);
 
 
-				System.out.println("\nNovo Abastecimento[" + n +"] realizado com a sigla do posto " +
+				System.out.println("\nNovo Abastecimento[" + contadorKombi +"] realizado com a sigla do posto " +
 									siglaPostoNovo + " preço da Gasolina " +
 									precoGasolinaNovo + " valor do Abastecimento " +
 									valorAbastecimentoNovo + " e data " +

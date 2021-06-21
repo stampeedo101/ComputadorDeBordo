@@ -15,7 +15,7 @@ public class Posto{
 
 	String[] siglasPosto = new String[]{"brC","brM","Outro"};
 
-	byte tamanhoDosVetoresPosto = 50, nPosto=0;
+	byte tamanhoDosVetoresPosto = 120, nPosto=0;
 
 	String[] siglaDoPosto = new String[tamanhoDosVetoresPosto];
 
