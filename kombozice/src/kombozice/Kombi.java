@@ -18,6 +18,8 @@ public class Kombi extends Posto {
 		
 		protected double km_litro = 6.5;
 		protected double combustivelTanque = 3;
+		protected double varKilometro =0,varGasolina =0;
+		
 		
 
 		
@@ -158,7 +160,7 @@ public class Kombi extends Posto {
 			km_litro = m;
 		}
 		
-		protected void calcularVariacaoTanque(int kilometroNovo) {
+		protected void calcularVariacaoTanque(int kilometroNovo,int n) {
 			
 			kilometragem[n] = kilometroNovo;
 
@@ -168,18 +170,19 @@ public class Kombi extends Posto {
 			
 			GasolinaNoTanque[n] = GasolinaNoTanque[n-1]-(buro - kilometragem[n-1])/km_litro;
 			
-			/*
-			System.out.println("\nvalor de gasolina [" + n + "] = "+ GasolinaNoTanque[n]+
-								" e o valor de kilometragem [" + n + "] = " + kilometragem[n]
-			);
-			*/
-
+		}
+		
+		protected void calcVarTanque2(int kilometroNovo, int n) {
 			
+			kilometragem[n] = kilometroNovo;
+			double buro = (double) kilometroNovo;			
+			GasolinaNoTanque[n] = ((double)valorAbastecimentoNovo)/precoGasolinaNovo + GasolinaNoTanque[n-2]-(buro - kilometragem[n-2])/km_litro;
+			
+
 		}
 		
 		protected void inserirValorTanque(int kilometroNovo){
-			
-			calcularVariacaoTanque(kilometroNovo);
+
 			
 			{
 				try
@@ -275,7 +278,7 @@ public class Kombi extends Posto {
 
 		
 		protected void variarKilometragem(int kilometroNovo) {
-			calcularVariacaoTanque(kilometroNovo);
+			calcularVariacaoTanque(kilometroNovo,n);
 			
 			inserirValorKilometragem();
 			inserirValorTanque(kilometroNovo);

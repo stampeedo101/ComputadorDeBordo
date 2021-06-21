@@ -31,7 +31,7 @@ public class AbastecimentoSpinner extends Kombi {
 
 	int valorAbastecimentoNovo = 0, diaAbastecimentoNovo=1, mesAbastecimentoNovo=1, anoAbastecimentoNovo=20;
 	
-	boolean kilometragemNovaEntrou = false, kilometragemInseridaApenas = false;
+	boolean kilometragemNovaEntrou = false, kilometragemInseridaApenas = false, botaoAbastecimentoClicado = false;
 
 	protected void criarSpinnerAbastecimento() {
 
@@ -147,9 +147,13 @@ public class AbastecimentoSpinner extends Kombi {
 						((Integer)spinner4.getValue()) 
 						;
 				
+				System.out.println("\nN antes do +1 = " + n);
+				
+				variarKilometragem(kilometroNovo);
+				
 				n = n + 1;
 				
-				variarKilometragem(kilometragemNova);
+				variarKilometragem(kilometroNovo);
 				
 				System.out.println(	"\nSomente a kilometragem foi modificada com:" +
 									"\nkilometragem [" + (n-1) + 
@@ -368,6 +372,7 @@ public class AbastecimentoSpinner extends Kombi {
 						((Integer)spinner3.getValue())*10 +
 						((Integer)spinner4.getValue()) 
 						;
+				
 
 
 				siglaPostoNovo = (String) SiglasPosto.getValue();
@@ -386,14 +391,42 @@ public class AbastecimentoSpinner extends Kombi {
 
 				anoAbastecimentoNovo = (Integer)anoDataSpinner.getValue();
 				
+				System.out.println("\nn antes de (n+1) = " + n);
+				
+				System.out.println(	"\ngasolinanotanque [" + (n + 1) + "] = " + GasolinaNoTanque[n+1] +
+						"\ngasolinanotanque [" + n +"] = " + GasolinaNoTanque[n] +
+						"\ngasolinanotanque [" + (n - 1) + "] = " + GasolinaNoTanque[n-1] +
+						"\ne uma parada = "+ ((double)valorAbastecimentoNovo)/precoGasolinaNovo
+						);
+				
 				n = n + 1;
 				
-				variarKilometragem(kilometragemNova);
+				
+				
+				
+				siglaDoPosto[nPosto] = siglaPostoNovo;
+				precoGasolina[nPosto] = precoGasolinaNovo;
+				valorAbastecimento[nPosto] = valorAbastecimentoNovo;
+				diaAbastecimento[nPosto] = diaAbastecimentoNovo;
+				mesAbastecimento[nPosto] = mesAbastecimentoNovo;
+				anoAbastecimento[nPosto] = anoAbastecimentoNovo;
 				
 				inserirNovosDadosTxT();
+				
+				System.out.println(	"\ngasolinanotanque [" + (n + 1) + "] = " + GasolinaNoTanque[n+1] +
+									"\ngasolinanotanque [" + n +"] = " + GasolinaNoTanque[n] +
+									"\ngasolinanotanque [" + (n - 1) + "] = " + GasolinaNoTanque[n-1] +
+									"\ne uma parada = "+ ((double)valorAbastecimentoNovo)/precoGasolinaNovo
+				);
+				
+				
+				
+				
+				
+				inserirDoubleArquivoTxt("gasolinaAbastecimento.txt", GasolinaNoTanque, n+1);
 
 
-				System.out.println("\nNovo Abastecimento realizado com a sigla do posto " +
+				System.out.println("\nNovo Abastecimento[" + n +"] realizado com a sigla do posto " +
 									siglaPostoNovo + " preço da Gasolina " +
 									precoGasolinaNovo + " valor do Abastecimento " +
 									valorAbastecimentoNovo + " e data " +
@@ -401,6 +434,8 @@ public class AbastecimentoSpinner extends Kombi {
 									mesAbastecimentoNovo + "/20" +
 									anoAbastecimentoNovo + "." 
 				);
+				
+				botaoAbastecimentoClicado = true;
 
 				f.setState(Frame.ICONIFIED);
 			}

@@ -9,6 +9,8 @@ public class Posto{
 	//kilometragem	Status tanque	Novo abastecimento mudar kilometragem e status tanque
 	
 	int valorAbastecimentoNovo=0, diaAbastecimentoNovo=1, mesAbastecimentoNovo=1, anoAbastecimentoNovo=21;
+	
+	
 	double precoGasolinaNovo=0;
 
 	String[] siglasPosto = new String[]{"brC","brM","Outro"};
@@ -171,7 +173,8 @@ public class Posto{
 				PrintWriter pr = new PrintWriter(fileName);    
 
 				for (int i=0; i < tamanhoVetor; i++){
-					if(siglas[i].contentEquals("null")) {
+					if(!(siglas[i].contentEquals("null"))) {
+						System.out.println("entrou no loop com i = " + i);
 						pr.println(siglas[i]);
 					}
 					

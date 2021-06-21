@@ -216,6 +216,7 @@ public class FrameGuide extends AbastecimentoSpinner {
 				//insertKilometragemNova();
 				
 				kilometragemInseridaApenas = false;
+				botaoAbastecimentoClicado = false;
 				
 				criarSpinnerAbastecimento();
 			}
@@ -370,7 +371,8 @@ public class FrameGuide extends AbastecimentoSpinner {
 					nomePostoValorGasolinaLabel.setText(siglaPostoNovo + " R$ " + dc3.format(precoGasolinaNovo));
 					abastecimentoDateLabel.setText(diaAbastecimentoNovo + "/" + mesAbastecimentoNovo + "/" + "20" + anoAbastecimentoNovo );
 					abastecimentoMoneyLabel.setText("R$ " + valorAbastecimentoNovo);
-					kmLitroLabel.setText(dc2.format(km_litro) + " km/l");					
+					kmLitroLabel.setText(dc2.format(km_litro) + " km/l");				
+					
 				}
 				
 				if(kilometragemInseridaApenas) {
@@ -399,8 +401,12 @@ public class FrameGuide extends AbastecimentoSpinner {
 					);
 				}
 
+				if(botaoAbastecimentoClicado) {
+					tanqueSlider.setValue((int) Math.round(GasolinaNoTanque[n+1])); //inserir valor slider
+				}else {
+					tanqueSlider.setValue((int) Math.round(GasolinaNoTanque[n])); //inserir valor slider
+				}
 				
-				tanqueSlider.setValue((int) Math.round(GasolinaNoTanque[n])); //inserir valor slider
 				
 			}
 		});
