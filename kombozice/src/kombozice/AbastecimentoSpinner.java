@@ -21,7 +21,8 @@ public class AbastecimentoSpinner extends Kombi {
 
 
 
-	String siglaPostoNovo = " "; 
+	String siglaPostoNovo = "null";
+	String preenchimentoSpinners = "null";
 
 	double precoGasolinaNovo = 0;
 
@@ -85,6 +86,39 @@ public class AbastecimentoSpinner extends Kombi {
 						0, //minimum value  
 						9, //maximum value  
 						1); //step
+		
+		//set kilometragem Spinners Values
+		
+		System.out.println("\n\n\nValor da kilometragem =" + kilometragem[contadorKombi-1] + 
+				"\n e n = " + contadorKombi + 
+				"\n e da preenchimento = " + preenchimentoSpinners);
+		
+		preenchimentoSpinners = String.valueOf(kilometragem[contadorKombi-1]);
+		
+		System.out.println("\n\n\nValor da  da kilometragem =" + kilometragem[contadorKombi] + 
+				"\n e n = " + contadorKombi + 
+				"\n e da preenchimento = " + preenchimentoSpinners +
+				"\n e da parada = " +
+				Integer.valueOf("1") +
+				" e outra parada = " +
+				preenchimentoSpinners.charAt(0)+
+				"\nCom o integer.valuOF " +
+				Integer.valueOf(preenchimentoSpinners.charAt(0)) +
+				"\n e integerOF 7 = "+
+				Integer.valueOf("7")
+				
+				
+				);
+
+		if(kilometragem[contadorKombi] > 99999 ) {
+			kilometragemSpinnerValue4.setValue(preenchimentoSpinners.charAt(4));
+		}
+		
+		
+		kilometragemSpinnerValue3.setValue(Integer.valueOf(preenchimentoSpinners.charAt(3)));
+		kilometragemSpinnerValue2.setValue(Integer.valueOf(preenchimentoSpinners.charAt(2)));
+		kilometragemSpinnerValue1.setValue(Integer.valueOf(preenchimentoSpinners.charAt(1)));
+		kilometragemSpinnerValue0.setValue(Integer.valueOf(preenchimentoSpinners.charAt(0)));
 
 		JSpinner kilometragemSpinner0 = new JSpinner(kilometragemSpinnerValue0);
 
