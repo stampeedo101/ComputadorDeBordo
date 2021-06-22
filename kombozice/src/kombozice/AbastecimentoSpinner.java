@@ -23,16 +23,100 @@ public class AbastecimentoSpinner extends Kombi {
 
 	String siglaPostoNovo = "null";
 	String preenchimentoSpinners = "null";
+	String outroPreenchimento = "null";
 
 	double precoGasolinaNovo = 0;
 
 	int kilometragemNova = 0;
 	
 	byte espacoVertical = 10,tamanhoPanel = 40,tamanhoSpinner = 60;
+	byte centenaMilhar = 0, dezenaMilhar = 0, milhar=0,centena=0,dezena=0,unidade=0;
 
 	int valorAbastecimentoNovo = 0, diaAbastecimentoNovo=1, mesAbastecimentoNovo=1, anoAbastecimentoNovo=20;
 	
-	boolean kilometragemNovaEntrou = false, kilometragemInseridaApenas = false, botaoAbastecimentoClicado = false;	
+	boolean kilometragemNovaEntrou = false, kilometragemInseridaApenas = false, botaoAbastecimentoClicado = false;
+	
+	protected void descobrirNumerosSpinner(int kilometragem) {
+		
+		int resto = 0;
+
+		//CENTENA DE MILHAR
+		if( (kilometragem > 99999) && (kilometragem < 200000)) {
+			centenaMilhar = 1;
+			resto = 100000;
+		}
+
+		for(int i = 1; i<9;i++) {
+			if( (kilometragem > 99999 + (i*100000) ) && (kilometragem < ((i+1)*100000) ) ){
+				centenaMilhar = (byte)(i + 1);
+				resto = 100000*i;
+			}
+
+		}
+		
+
+
+		//DEZENA DE MILHAR
+		
+		if( (kilometragem - resto > 9999) && (kilometragem - resto < 20000)) {
+			dezenaMilhar = 1;
+		}
+
+		for(int i = 1; i<9;i++) {
+			if( (kilometragem - resto > 9999 + (i*10000)) && (kilometragem - resto < ((i+2)*10000) )) {
+				dezenaMilhar = (byte)(i + 1);
+			}
+		}
+		
+		//MILHAR
+		resto = centenaMilhar*100000 + dezenaMilhar*10000;
+		
+		if( (kilometragem -resto > 999) && (kilometragem-resto  < 2000)) {
+			milhar = 1;
+		}
+
+		for(int i = 1; i<9;i++) {
+			if( (kilometragem-resto  > 999 + (i*1000)) && (kilometragem-resto  < ((i+2)*1000) )) {
+				milhar = (byte)(i + 1);
+			}
+		}
+		
+		//CENTENA
+		resto = centenaMilhar*100000 + dezenaMilhar*10000 + milhar*1000;
+		
+		if( (kilometragem -resto > 99) && (kilometragem -resto < 200)) {
+			centena = 1;
+		}
+
+		for(int i = 1; i<9;i++) {
+			if( (kilometragem - resto > 99 + (i*100)) && (kilometragem -resto < ((i+2)*100) )) {
+				centena = (byte)(i + 1);
+			}
+		}
+		
+		//DEZENA
+		resto = centenaMilhar*100000 + dezenaMilhar*10000 + milhar*1000 + centena*100;
+		
+		if( (kilometragem -resto > 9) && (kilometragem -resto < 20)) {
+			dezena = 1;
+		}
+
+		for(int i = 1; i<9;i++) {
+			if( (kilometragem -resto > 9 + (i*10)) && (kilometragem -resto < ((i+2)*10) )) {
+				dezena = (byte)(i + 1);
+			}
+		}
+		
+		//UNIDADE
+		resto = centenaMilhar*100000 + dezenaMilhar*10000 + milhar*1000 + centena*100 + dezena*10;
+
+		for(int i = 0; i<10;i++) {
+			if( kilometragem - resto == i ) {
+				unidade = (byte)(i);
+			}
+		}
+		
+	}
 
 	protected void criarSpinnerAbastecimento() {
 
@@ -56,69 +140,39 @@ public class AbastecimentoSpinner extends Kombi {
 		firstLabel.setFont(new Font("Monospace",Font.PLAIN,tamanhoPanel/2));
 		firstLabel.setVerticalAlignment(JLabel.CENTER);
 		firstLabel.setHorizontalAlignment(JLabel.CENTER);
+		
+		
+		descobrirNumerosSpinner(kilometragem[contadorKombi-1]);
 
 		SpinnerModel kilometragemSpinnerValue0 =  
-				new SpinnerNumberModel(5, //initial value  
+				new SpinnerNumberModel(dezenaMilhar, //initial value  
 						0, //minimum value  
 						9, //maximum value  
 						1); //step
 
 		SpinnerModel kilometragemSpinnerValue1 =  
-				new SpinnerNumberModel(5, //initial value  
+				new SpinnerNumberModel(milhar, //initial value  
 						0, //minimum value  
 						9, //maximum value  
 						1); //step
 
 		SpinnerModel kilometragemSpinnerValue2 =  
-				new SpinnerNumberModel(6, //initial value  
+				new SpinnerNumberModel(centena, //initial value  
 						0, //minimum value  
 						9, //maximum value  
 						1); //step
 
 		SpinnerModel kilometragemSpinnerValue3 =  
-				new SpinnerNumberModel(9, //initial value  
+				new SpinnerNumberModel(dezena, //initial value  
 						0, //minimum value  
 						9, //maximum value  
 						1); //step
 
 		SpinnerModel kilometragemSpinnerValue4 =  
-				new SpinnerNumberModel(6, //initial value  
+				new SpinnerNumberModel(unidade, //initial value  
 						0, //minimum value  
 						9, //maximum value  
 						1); //step
-		
-		//set kilometragem Spinners Values
-		
-		System.out.println("\n\n\nValor da kilometragem =" + kilometragem[contadorKombi-1] + 
-				"\n e n = " + contadorKombi + 
-				"\n e da preenchimento = " + preenchimentoSpinners);
-		
-		preenchimentoSpinners = String.valueOf(kilometragem[contadorKombi-1]);
-		
-		System.out.println("\n\n\nValor da  da kilometragem =" + kilometragem[contadorKombi] + 
-				"\n e n = " + contadorKombi + 
-				"\n e da preenchimento = " + preenchimentoSpinners +
-				"\n e da parada = " +
-				Integer.valueOf("1") +
-				" e outra parada = " +
-				preenchimentoSpinners.charAt(0)+
-				"\nCom o integer.valuOF " +
-				Integer.valueOf(preenchimentoSpinners.charAt(0)) +
-				"\n e integerOF 7 = "+
-				Integer.valueOf("7")
-				
-				
-				);
-
-		if(kilometragem[contadorKombi] > 99999 ) {
-			kilometragemSpinnerValue4.setValue(preenchimentoSpinners.charAt(4));
-		}
-		
-		
-		kilometragemSpinnerValue3.setValue(Integer.valueOf(preenchimentoSpinners.charAt(3)));
-		kilometragemSpinnerValue2.setValue(Integer.valueOf(preenchimentoSpinners.charAt(2)));
-		kilometragemSpinnerValue1.setValue(Integer.valueOf(preenchimentoSpinners.charAt(1)));
-		kilometragemSpinnerValue0.setValue(Integer.valueOf(preenchimentoSpinners.charAt(0)));
 
 		JSpinner kilometragemSpinner0 = new JSpinner(kilometragemSpinnerValue0);
 
@@ -162,7 +216,19 @@ public class AbastecimentoSpinner extends Kombi {
 		insertKilometragemButton.setFont(new Font("Monospace",Font.PLAIN,20));
 		insertKilometragemButton.setBounds((720-280)/2 + 5*tamanhoSpinner + 5*espacoVertical,2*espacoVertical+tamanhoPanel, 120, tamanhoSpinner);
 		f.add(insertKilometragemButton);
+		
+		System.out.println(	"\nEntrou no spinner:" +
+				"\nkilometragem [" + (contadorKombi-1) + 
+				"] = " + kilometragem[contadorKombi-1] +
+				"\nkilometragem [" + contadorKombi +
+				"] = " + kilometragem[contadorKombi] +
+				" \nkilometragem[" + (contadorKombi+1) +
+				"] = " + kilometragem[contadorKombi+1]+
+				"\nkilometragemNova = " + kilometragemNova
+);
 
+		//INSERIR KILOMETRAGEM
+		
 		insertKilometragemButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -182,9 +248,29 @@ public class AbastecimentoSpinner extends Kombi {
 						((Integer)kilometragemSpinner4.getValue()) 
 						;
 				
+				System.out.println(	"\ndepois botao:" +
+						"\nkilometragem [" + (contadorKombi-1) + 
+						"] = " + kilometragem[contadorKombi-1] +
+						"\nkilometragem [" + contadorKombi +
+						"] = " + kilometragem[contadorKombi] +
+						" \nkilometragem[" + (contadorKombi+1) +
+						"] = " + kilometragem[contadorKombi+1]+
+						"\nkilometragemNova = " + kilometragemNova
+	);
+				
 				System.out.println("\nN antes do +1 = " + contadorKombi);
 				
 				variarKilometragem(kilometroNovo);
+				
+				System.out.println(	"\nDepois do metdodo:" +
+						"\nkilometragem [" + (contadorKombi-1) + 
+						"] = " + kilometragem[contadorKombi-1] +
+						"\nkilometragem [" + contadorKombi +
+						"] = " + kilometragem[contadorKombi] +
+						" \nkilometragem[" + (contadorKombi+1) +
+						"] = " + kilometragem[contadorKombi+1]+
+						"\nkilometragemNova = " + kilometragemNova
+	);
 				
 				contadorKombi = contadorKombi + 1;
 				
@@ -230,7 +316,7 @@ public class AbastecimentoSpinner extends Kombi {
 
 		JSpinner SiglasPosto = new JSpinner(listaSiglasPosto);
 
-		SiglasPosto.setBounds(espacoVertical, tamanhoSpinner+2*tamanhoPanel+4*espacoVertical,2*tamanhoSpinner,tamanhoSpinner);
+		SiglasPosto.setBounds(espacoVertical, tamanhoSpinner + 2 * tamanhoPanel+4*espacoVertical,2*tamanhoSpinner,tamanhoSpinner);
 
 		SiglasPosto.setFont(new Font("Monospace",Font.PLAIN,tamanhoSpinner/2));
 
