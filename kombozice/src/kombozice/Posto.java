@@ -13,9 +13,9 @@ public class Posto{
 	
 	double precoGasolinaNovo=0;
 
-	String[] siglasPosto = new String[]{"brC","brM","Outro"};
+	String[] valoresSiglasPosto = new String[]{"brC","brM","Outro"};
 
-	byte tamanhoDosVetoresPosto = 120, nPosto=0;
+	byte tamanhoDosVetoresPosto = 120, contadorPosto=0;
 
 	String[] siglaDoPosto = new String[tamanhoDosVetoresPosto];
 
@@ -51,8 +51,8 @@ public class Posto{
 
 				if(x.hasNextDouble()) {
 					doubleValues[i] = x.nextDouble()/1000;
-					nPosto = i;
-					System.out.println("valores de double" + arquivo + " " + doubleValues[i] + " i "+ i + " O nPosto é " + nPosto);
+					contadorPosto = i;
+					//System.out.println("valores de double" + arquivo + " " + doubleValues[i] + " i "+ i + " O contadorPosto é " + contadorPosto);
 				}				
 
 			}
@@ -77,7 +77,7 @@ public class Posto{
 
 				if(x.hasNextInt()) {
 					doubleValues[i] = x.nextInt();
-					System.out.println("valores no arquivo " + arquivo + " " + doubleValues[i] + " i "+ i);
+					//System.out.println("valores no arquivo " + arquivo + " " + doubleValues[i] + " i "+ i);
 				}				
 
 			}
@@ -101,7 +101,7 @@ public class Posto{
 
 				if(x.hasNext()) {
 					siglaDoPosto[i] = x.next();
-					System.out.println("siglaDoPosto " + siglaDoPosto[i] + " i "+ i);
+					//System.out.println("siglaDoPosto " + siglaDoPosto[i] + " i "+ i);
 				}				
 
 			}
@@ -207,15 +207,15 @@ public class Posto{
 		lerSiglaDoPosto();
 	}
 	
-	protected void inserirNovosDadosTxT() {
+	protected void inserirNovoAbstecimentoTxT() {
 
 		if(valorAbastecimentoNovo != 0) {
 			
-			precoGasolina[nPosto + 1] = precoGasolinaNovo;
-			valorAbastecimento[nPosto + 1] = valorAbastecimentoNovo;
-			diaAbastecimento[nPosto + 1] = diaAbastecimentoNovo;
-			mesAbastecimento[nPosto + 1] = mesAbastecimentoNovo;
-			anoAbastecimento[nPosto + 1] = anoAbastecimentoNovo;
+			precoGasolina[contadorPosto + 1] = precoGasolinaNovo;
+			valorAbastecimento[contadorPosto + 1] = valorAbastecimentoNovo;
+			diaAbastecimento[contadorPosto + 1] = diaAbastecimentoNovo;
+			mesAbastecimento[contadorPosto + 1] = mesAbastecimentoNovo;
+			anoAbastecimento[contadorPosto + 1] = anoAbastecimentoNovo;
 			
 			inserirDoubleArquivoTxt("precoGasolinaNovo.txt", precoGasolina,tamanhoDosVetoresPosto);
 			inserirByteArquivoTxt("vAbastNovo.txt", valorAbastecimento,tamanhoDosVetoresPosto);

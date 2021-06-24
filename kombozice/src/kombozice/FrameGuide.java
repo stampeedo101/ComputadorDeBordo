@@ -15,12 +15,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 
-public class FrameGuide extends AbastecimentoSpinner {
+public class FrameGuide extends InsercaoDadosSpinners {
 	
 	DecimalFormat dc2 = new DecimalFormat("0.00");
 	DecimalFormat dc3 = new DecimalFormat("0.000");
-	
-	int gasolinaNovaTanque = 0;
 	
 	public void executarAcaoInsert(MouseEvent ae) {
 		
@@ -147,8 +145,15 @@ public class FrameGuide extends AbastecimentoSpinner {
 		hpTanqueLabel.setHorizontalAlignment(JLabel.CENTER);
 		hpTanqueLabel.setVerticalAlignment(JLabel.CENTER);
 		
+		/*
+		//VALORES PARA O SLIDER DO TANQUE:
+		System.out.println("valor de tanque[n] = " + GasolinaNoTanque[contadorKombi] +
+				"\nvalor de tanque[n+1] = " + GasolinaNoTanque[contadorKombi+1]
+				);
+		*/
+		
 		// Different settings on the sliders
-        JSlider tanqueSlider = new JSlider(0,40,20);
+        JSlider tanqueSlider = new JSlider(0,40,((int)  Math.round(GasolinaNoTanque[contadorKombi]) ));
         // JSlider slider = new JSlider(JSlider.VERTICAL);
         // JSlider slider = new JSlider(-100, 100, 50);
         // JSlider slider = new JSlider(JSlider.VERTICAL, -100, 100, 50);
@@ -231,6 +236,8 @@ public class FrameGuide extends AbastecimentoSpinner {
 				botaoAbastecimentoClicado = false;
 				
 				criarSpinnerAbastecimento();
+				
+				//tanqueSlider.setValue(35);
 			}
 		});
 
@@ -248,7 +255,7 @@ public class FrameGuide extends AbastecimentoSpinner {
 
 		JLabel nomePostoValorGasolinaLabel = new JLabel();
 		nomePostoValorGasolinaLabel.setBackground(Color.decode("#004a93"));
-		nomePostoValorGasolinaLabel.setText("brC R$ " + precoGasolina[nPosto]);
+		nomePostoValorGasolinaLabel.setText("brC R$ " + devolverprecoGasolinaTxT(precoGasolina[contadorPosto]) );
 		nomePostoValorGasolinaLabel.setForeground(Color.decode("#ffffff"));
 		nomePostoValorGasolinaLabel.setFont(new Font("Monospace",Font.PLAIN,90));
 		nomePostoValorGasolinaLabel.setVerticalAlignment(JLabel.CENTER);
@@ -268,7 +275,7 @@ public class FrameGuide extends AbastecimentoSpinner {
 		abastecimentoDateLabel.setBackground(Color.decode("#004a93"));
 		
 
-		abastecimentoDateLabel.setText(formataroDiaMes(nPosto));
+		abastecimentoDateLabel.setText(formataroDiaMes(contadorPosto));
 
 	
 		abastecimentoDateLabel.setForeground(Color.decode("#ffffff"));
@@ -289,7 +296,7 @@ public class FrameGuide extends AbastecimentoSpinner {
 		JLabel abastecimentoMoneyLabel = new JLabel();
 		abastecimentoMoneyLabel.setBackground(Color.decode("#004a93"));
 		
-		abastecimentoMoneyLabel.setText("R$ " + valorAbastecimento[nPosto] + ".00");
+		abastecimentoMoneyLabel.setText("R$ " + valorAbastecimento[contadorPosto] + ".00");
 		abastecimentoMoneyLabel.setForeground(Color.decode("#ffffff"));
 		abastecimentoMoneyLabel.setFont(new Font("Monospace",Font.PLAIN,90));
 		abastecimentoMoneyLabel.setVerticalAlignment(JLabel.CENTER);
@@ -390,12 +397,8 @@ public class FrameGuide extends AbastecimentoSpinner {
 							km_litro +
 							" kilometros por litro."
 					);
-					gasolinaNovaTanque = ((int) Math.round(GasolinaNoTanque[contadorKombi-1]));
-					System.out.println("\nvalor de math.round gasolinaNoTanque n-1 = " + Math.round(GasolinaNoTanque[contadorKombi-1]) +
-							"\n gasolinanovatanque =  " + gasolinaNovaTanque);
-					
-					
-					tanqueSlider.setValue(21) //inserir valor slider NAO ESTA SETANDO???????????????????????
+	
+					tanqueSlider.setValue((int) Math.round(GasolinaNoTanque[contadorKombi-1])); //inserir valor slider
 					
 					
 				} else {
@@ -406,20 +409,22 @@ public class FrameGuide extends AbastecimentoSpinner {
 							" de litros de gasolina no Tanque.\nE faz " +
 							km_litro +
 							" kilometros por litro.\nNova data de abastecimento " + 
-							FrameGuide.this.diaAbastecimento[nPosto] +
-							"/" + FrameGuide.this.mesAbastecimento[nPosto] +
-							"/" + anoAbastecimento[nPosto] +
-							" .\nO valor do novo Abastecimento foi de R$ " + valorAbastecimento[nPosto] +
-							",00. A sigla do posto é " + siglaDoPosto[nPosto] +
-							". O preço da gasolina no posto é " + dc3.format(precoGasolina[nPosto])
+							FrameGuide.this.diaAbastecimento[contadorPosto] +
+							"/" + FrameGuide.this.mesAbastecimento[contadorPosto] +
+							"/" + anoAbastecimento[contadorPosto] +
+							" .\nO valor do novo Abastecimento foi de R$ " + valorAbastecimento[contadorPosto] +
+							",00. A sigla do posto é " + siglaDoPosto[contadorPosto] +
+							". O preço da gasolina no posto é " + dc3.format(precoGasolina[contadorPosto])
 					);
 				}
 
+				/*
 				if(botaoAbastecimentoClicado) {
 					tanqueSlider.setValue((int) Math.round(GasolinaNoTanque[contadorKombi+1])); //inserir valor slider
 				}else {
 					tanqueSlider.setValue((int) Math.round(GasolinaNoTanque[contadorKombi])); //inserir valor slider
 				}
+				*/
 				
 				
 			}
@@ -428,6 +433,8 @@ public class FrameGuide extends AbastecimentoSpinner {
 		/* BOTÃO REFRESH +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 
+		descobrirPrecoGasolina(precoGasolina[contadorPosto]);
+		
 		/* INSERT LABELS*/
 
 		//kilometragem

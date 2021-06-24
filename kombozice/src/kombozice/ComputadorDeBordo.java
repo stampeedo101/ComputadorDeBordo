@@ -24,7 +24,7 @@ public class ComputadorDeBordo extends FrameGuide {
 
 
 
-		if(comp00zero.kilometragemNovaEntrou) {
+		if(comp00zero.kilometragemInseridaApenas) {
 			System.out.println("\no valor de kilometragem nova é " + comp00zero.kilometragemNova);
 		}
 
