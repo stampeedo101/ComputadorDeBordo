@@ -18,7 +18,9 @@ import javax.swing.JSlider;
 public class FrameGuide extends AbastecimentoSpinner {
 	
 	DecimalFormat dc2 = new DecimalFormat("0.00");
-	DecimalFormat dc3 = new DecimalFormat("0.000");	
+	DecimalFormat dc3 = new DecimalFormat("0.000");
+	
+	int gasolinaNovaTanque = 0;
 	
 	public void executarAcaoInsert(MouseEvent ae) {
 		
@@ -72,6 +74,7 @@ public class FrameGuide extends AbastecimentoSpinner {
 		
 		int jFrameWidth = 720, widthPanel = 700;
 		int jFrameHight = 1080, heightPanel = 100;
+	
 		
 		String kilometragemFormatada = new String();
 		kilometragemFormatada = "null";
@@ -380,13 +383,21 @@ public class FrameGuide extends AbastecimentoSpinner {
 				
 				if(kilometragemInseridaApenas) {
 					System.out.println("\nSaída depois do refresh (com modificação apenas na kilometragem):\nA " + nomeDaKombosa + 
-							" já rodou " + FrameGuide.this.kilometragem[contadorKombi] +
+							" já rodou " + FrameGuide.this.kilometragem[contadorKombi-1] +
 							" kilometros.\nTem " +
-							GasolinaNoTanque[contadorKombi] +
+							GasolinaNoTanque[contadorKombi-1] +
 							" de litros de gasolina no Tanque.\nE faz " +
 							km_litro +
 							" kilometros por litro."
 					);
+					gasolinaNovaTanque = ((int) Math.round(GasolinaNoTanque[contadorKombi-1]));
+					System.out.println("\nvalor de math.round gasolinaNoTanque n-1 = " + Math.round(GasolinaNoTanque[contadorKombi-1]) +
+							"\n gasolinanovatanque =  " + gasolinaNovaTanque);
+					
+					
+					tanqueSlider.setValue(21) //inserir valor slider NAO ESTA SETANDO???????????????????????
+					
+					
 				} else {
 					System.out.println("\nSaída depois do refresh (Abastecimento inserido):\nA " + nomeDaKombosa + 
 							" já rodou " + FrameGuide.this.kilometragem[contadorKombi] +

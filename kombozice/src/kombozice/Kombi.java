@@ -14,7 +14,7 @@ public class Kombi extends Posto {
 		protected boolean tamanhoVetorNecessario = true, refreshAindaNãoClicado = true;
 		
 		protected int tamanhoVetores = 50, contadorKombi = 0;
-		protected int kilometroNovo = 55696;
+		//protected int kilometroNovo = 55696; ????
 		
 		protected double km_litro = 6.5;
 		protected double combustivelTanque = 3;
@@ -162,6 +162,8 @@ public class Kombi extends Posto {
 		}
 		
 		protected void calcularVariacaoTanque(int kilometroNovo,int n) {
+			
+			System.out.println("quem é n = " + n);
 			
 			kilometragem[n] = kilometroNovo;
 

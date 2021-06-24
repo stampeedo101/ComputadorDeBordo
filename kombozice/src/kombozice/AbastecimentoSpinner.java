@@ -260,7 +260,7 @@ public class AbastecimentoSpinner extends Kombi {
 				
 				System.out.println("\nN antes do +1 = " + contadorKombi);
 				
-				variarKilometragem(kilometroNovo);
+				variarKilometragem(kilometragemNova);
 				
 				System.out.println(	"\nDepois do metdodo:" +
 						"\nkilometragem [" + (contadorKombi-1) + 
@@ -269,12 +269,18 @@ public class AbastecimentoSpinner extends Kombi {
 						"] = " + kilometragem[contadorKombi] +
 						" \nkilometragem[" + (contadorKombi+1) +
 						"] = " + kilometragem[contadorKombi+1]+
-						"\nkilometragemNova = " + kilometragemNova
+						"\nkilometragemNova = " + kilometragemNova +
+						"\n gasolina ["+ (contadorKombi-1) + 
+						"] = " + GasolinaNoTanque[contadorKombi-1] +
+						"\n gasolina [" + contadorKombi +
+						"] = " + GasolinaNoTanque[contadorKombi] +
+						" \n gasolina[" + (contadorKombi+1) +
+						"] = " + GasolinaNoTanque[contadorKombi+1]
 	);
 				
 				contadorKombi = contadorKombi + 1;
 				
-				variarKilometragem(kilometroNovo);
+				//variarKilometragem(kilometragemNova);
 				
 				System.out.println(	"\nSomente a kilometragem foi modificada com:" +
 									"\nkilometragem [" + (contadorKombi-1) + 
