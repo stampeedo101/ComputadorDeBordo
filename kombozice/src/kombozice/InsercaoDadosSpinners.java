@@ -99,8 +99,6 @@ public class InsercaoDadosSpinners extends Kombi {
 			}
 
 		}
-		
-
 
 		//DEZENA DE MILHAR
 		
@@ -181,6 +179,10 @@ public class InsercaoDadosSpinners extends Kombi {
 		
 		kilometragemInseridaApenas = true;
 	}
+	
+	protected void pegarEvariarAbastecimento() {
+		
+	}
 
 	protected void criarSpinnerAbastecimento() {
 
@@ -189,6 +191,15 @@ public class InsercaoDadosSpinners extends Kombi {
 		f.setSize(720,4*tamanhoSpinner+4*tamanhoPanel+8*espacoVertical);
 		f.getContentPane().setBackground(Color.decode("#FFF88F"));
 		//3*tamanhoSpinner+3*tamanhoPanel+7*espacoVertical
+		
+		//SET NEW VARIABLES
+		
+		System.out.println(	"contador kombi  = " + contadorKombi +
+							"\ncontador Posto = " + contadorPosto
+							);
+		
+		descobrirNumerosSpinner(kilometragem[contadorKombi-1]);
+		
 
 		//INSERIR KILOMETRAGEM
 
@@ -204,9 +215,6 @@ public class InsercaoDadosSpinners extends Kombi {
 		firstLabel.setFont(new Font("Monospace",Font.PLAIN,tamanhoPanel/2));
 		firstLabel.setVerticalAlignment(JLabel.CENTER);
 		firstLabel.setHorizontalAlignment(JLabel.CENTER);
-		
-		
-		descobrirNumerosSpinner(kilometragem[contadorKombi-1]);
 
 		SpinnerModel kilometragemSpinnerValue0 =  
 				new SpinnerNumberModel(dezenaMilhar, //initial value  
@@ -410,10 +418,12 @@ public class InsercaoDadosSpinners extends Kombi {
 
 
 		//INSERIR VALOR GASOLINA
+		
+		System.out.println("\n\n\nprecogasolina [" + contadorPosto + "] = " + precoGasolina[contadorPosto] + "\n\n\n");
 
 		precoGasolinaFormatado = "" + precoGasolina[contadorPosto];
 		
-		System.out.println("precogasolinaformatada = " + precoGasolinaFormatado+" contadorPosto" + contadorPosto);
+		System.out.println("precogasolinaformatada = " + precoGasolinaFormatado + " contadorPosto" + contadorPosto);
 		
 		SpinnerModel gasolinaSpinnerValue0 =  
 				new SpinnerNumberModel(Character.getNumericValue(precoGasolinaFormatado.charAt(0)), //initial value  
@@ -592,6 +602,8 @@ public class InsercaoDadosSpinners extends Kombi {
 						(Integer)kilometragemSpinner3.getValue(),
 						(Integer)kilometragemSpinner4.getValue())
 				;
+				
+				contadorPosto = (byte)(contadorPosto + 1);
 
 				siglaDoPosto[contadorPosto] = (String) SiglasPosto.getValue();
 
@@ -609,58 +621,35 @@ public class InsercaoDadosSpinners extends Kombi {
 
 				anoAbastecimento[contadorPosto] = (Integer)anoDataSpinner.getValue();
 				
-				System.out.println("antes de inserirNovoAbstecimentoTxT");	
-				for(int i = contadorPosto -2; i<contadorPosto+2;i++) {
-					System.out.println(	"sigla do posto = "+ siglaDoPosto[i] +
-										"\nprecoGasolina = " + precoGasolina[i] +
-										"\nvalorAbastecimento = " +valorAbastecimento[i] +
-										"\ndiaAbast = " + diaAbastecimento[i] +
-										"\nmesAbas = "+ mesAbastecimento[i] + 
-										"\nanotAbas = " + anoAbastecimento[i] +
-										"\nnPosto = " + contadorPosto + 
-										"\ni = " + i
-							);
-				}
+				System.out.println("\nGasolinaNoTanque[" + contadorKombi + "] = " + GasolinaNoTanque[contadorKombi-1] + " contadorPosto = " + contadorPosto+
+						"\n " + valorAbastecimento[contadorPosto] + " " + precoGasolina[contadorPosto]
+						
+						
+						);
+				
+				GasolinaNoTanque[contadorKombi-1] = GasolinaNoTanque[contadorKombi-1] +
+						 (valorAbastecimento[contadorPosto] / precoGasolina[contadorPosto])
+						;
 		
+				System.out.println("\nGasolinaNoTanque[" + (contadorKombi -1 )+ "] = " + GasolinaNoTanque[contadorKombi-1] + " contadorPosto = " + contadorPosto+
+						"\n " + valorAbastecimento[contadorPosto] + " " + precoGasolina[contadorPosto] + " " + (valorAbastecimento[contadorPosto] / precoGasolina[contadorPosto])
+						
+						
+						);
 				
 				inserirNovoAbstecimentoTxT();
-				System.out.println("depois de inserirNovoAbstecimentoTxT");	
-				
-				for(int i = contadorPosto -2; i<contadorPosto+2;i++) {
-					System.out.println(	"sigla do posto = "+ siglaDoPosto[i] +
-										"\nprecoGasolina = " + precoGasolina[i] +
-										"\nvalorAbastecimento = " +valorAbastecimento[i] +
-										"\ndiaAbast = " + diaAbastecimento[i] +
-										"\nmesAbas = "+ mesAbastecimento[i] + 
-										"\nanotAbas = " + anoAbastecimento[i] +
-										"\nnPosto = " + contadorPosto + 
-										"\ni = " + i
-							);
-				}
 				
 				inserirDoubleArquivoTxt("gasolinaAbastecimento.txt", GasolinaNoTanque, contadorKombi+1);
-				System.out.println("depois de inserirDoubleArquivoTxt");	
-				for(int i = contadorPosto -2; i<contadorPosto+2;i++) {
-					System.out.println(	"sigla do posto = "+ siglaDoPosto[i] +
-										"\nprecoGasolina = " + precoGasolina[i] +
-										"\nvalorAbastecimento = " +valorAbastecimento[i] +
-										"\ndiaAbast = " + diaAbastecimento[i] +
-										"\nmesAbas = "+ mesAbastecimento[i] + 
-										"\nanotAbas = " + anoAbastecimento[i] +
-										"\nnPosto = " + contadorPosto + 
-										"\ni = " + i
-							);
-				}
 
 				System.out.println("\nNovo Abastecimento[" + contadorKombi +"] realizado com a sigla do posto " +
-									siglaPostoNovo + " preço da Gasolina " +
-									precoGasolinaNovo + " valor do Abastecimento " +
-									valorAbastecimentoNovo + " e data " +
-									diaAbastecimentoNovo + "/" +
-									mesAbastecimentoNovo + "/20" +
-									anoAbastecimentoNovo + "." 
+						siglaDoPosto[contadorPosto] + " preço da Gasolina " +
+						precoGasolina[contadorPosto] + " valor do Abastecimento " +
+						valorAbastecimento[contadorPosto] + " e data " +
+						diaAbastecimento[contadorPosto] + "/" +
+						mesAbastecimento[contadorPosto] + "/20" +
+						anoAbastecimento[contadorPosto] + "." 
 				);
-				//contadorPosto = (byte)(contadorPosto + 1);
+			
 				
 				botaoAbastecimentoClicado = true;
 

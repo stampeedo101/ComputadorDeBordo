@@ -172,10 +172,11 @@ public class Posto{
 			{
 				PrintWriter pr = new PrintWriter(fileName);    
 
-				for (int i=0; i < tamanhoVetor; i++){
+				for (int i = 0 ; i < tamanhoVetor -5; i++){
+					
 					if(!(siglas[i].contentEquals("null"))) {
-						System.out.println("entrou no loop com i = " + i);
-						pr.println(siglas[i]);
+						//System.out.println("entrou no loop, ou seja, (if = true) com i = " + i + " com string = " + siglas[i]);
+						pr.println(siglas[i] + " i = " + i);
 					}
 					
 				}
@@ -209,7 +210,7 @@ public class Posto{
 	
 	protected void inserirNovoAbstecimentoTxT() {
 
-		if(valorAbastecimentoNovo != 0) {
+		if(precoGasolina[contadorPosto] != 0) {
 			
 			precoGasolina[contadorPosto + 1] = precoGasolinaNovo;
 			valorAbastecimento[contadorPosto + 1] = valorAbastecimentoNovo;
